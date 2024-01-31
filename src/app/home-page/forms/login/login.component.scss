@@ -1,0 +1,12 @@
+.wrapper{
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+
+    .registration{
+        text-align: center;
+        color: #bb0c75;
+        text-decoration: underline;
+        cursor: pointer;
+    }
+}
