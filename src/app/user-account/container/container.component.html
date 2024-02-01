@@ -1,0 +1,24 @@
+<div class="side-bar">
+    <div class="wrapper">
+        <div class="user">
+            <img src="/assets/icons/user.svg">
+        </div>
+        <div class="nav">
+            <div class="item" routerLinkActive="active" routerLink="dashboard">
+                <img>
+                <span>Dashboard</span>
+            </div>
+            <div class="item" routerLinkActive="active" routerLink="tasks">
+                <img>
+                <span>Tasks</span>
+            </div>
+            <div class="item" routerLinkActive="active" routerLink="settings">
+                <img>
+                <span>Settings</span>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="content">
+    <router-outlet></router-outlet>
+</div>

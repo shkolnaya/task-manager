@@ -7,9 +7,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HomePageComponent implements OnInit {
 
+  isFormOpen: boolean = false;
+
   constructor() { }
 
   ngOnInit(): void {
+  }
+
+  openForm(){
+    this.isFormOpen = true;
   }
 
 }

@@ -1,6 +1,10 @@
-<div class="header">
-    <img src="/assets/icons/arrow-left.svg">
-</div>
-<div class="content">
-    <app-login></app-login>
+<div class="container" [class.open]="isOpened">
+    <div class="header">
+        <img src="/assets/icons/arrow-left.svg" (click)="closeForm()">
+        <div class="sign" (click)="changeContent( )">{{headerButtonText}}</div>
+    </div>
+    <div class="content">
+        <app-login *ngIf="formContent==formContentEnum.Login"></app-login>
+        <app-registration *ngIf="formContent==formContentEnum.Registration"></app-registration>
+    </div>
 </div>
