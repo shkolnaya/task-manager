@@ -11,3 +11,9 @@
         font-weight: 700;
     }
 }
+
+.tasks{
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}

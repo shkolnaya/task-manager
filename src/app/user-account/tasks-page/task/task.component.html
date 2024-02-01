@@ -1,9 +1,8 @@
 <div class="substrate">
     <div class="card">
-        <p class="heading">
-          Popular this month
-        </p>
-        <p>Powered By</p>
-        <p>Uiverse</p>
+        <div class="category">{{task.category}}</div>
+        <div class="name">{{task.name}}</div>
+        <div class="desc" *ngIf="task.description">{{task.description}}</div>
+        <div class="done">Done</div>
     </div>
 </div>

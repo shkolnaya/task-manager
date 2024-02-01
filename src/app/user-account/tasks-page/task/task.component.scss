@@ -1,18 +1,53 @@
 .substrate{
-    background: linear-gradient(68deg, #df8deb, #690176, #BB0C75, #d511f4);
-    box-shadow: 0px 0px 10px 2px #d611f4a7;
+    background: linear-gradient(68deg, #c87dd4, #690176, #BB0C75, #d511f4);
+    box-shadow: 0px 0px 5px 1px #d611f4a7;
     display: flex;
     justify-content: center;
     width: 300px;
     border-radius: 8px;
-}
+
+    &:hover{
+        box-shadow: 0px 0px 10px 3px #d611f4a7; 
+    }
+};
+
 
 .card{
     background-color:  rgb(30, 29, 29);
-    padding: 10px;
-    color: white;
+    padding: 20px;
+    color: rgb(223, 222, 222);
     width: 100%;
     border-radius: 8px;
-
     margin: 3px;
+
+    .category{
+        background-color: #eb41a737;
+        border-radius: 50px;
+        font-size: 14px;
+        text-align: center;
+        padding: 3px 7px;
+        display: inline;
+        font-weight: 300;
+    }
+
+    .name{
+        font-size: 20px;
+        font-weight: 500;
+        margin-top: 10px;
+    }
+
+    .desc{
+        color: rgb(167, 167, 167)
+    }
+
+    .done{
+        color: #d611f48b;
+        margin: 10px 0;
+        cursor: pointer;
+        width: 50px;
+        
+        &:hover{
+            color: #d611f4;
+        }
+    }
 }
