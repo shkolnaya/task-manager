@@ -2,6 +2,29 @@
     <div class="title">My tasks</div>
     <div class="add">+</div>
 </div>
-<div class="tasks">
-    <app-task *ngFor="let task of tasks" [task]="task"></app-task>
+<!-- <div cdkDropList class="tasks" (cdkDropListDropped)="drop($event)">
+    <app-task *ngFor="let task of tasks" [task]="task" cdkDrag></app-task>
+</div> -->
+
+<div class="content">
+    <div 
+        class="day" 
+        cdkDropList 
+        #todayList="cdkDropList"
+        [cdkDropListData]="todayTasks"
+        [cdkDropListConnectedTo]="[tomorrowList]"
+        (cdkDropListDropped)="drop($event)">
+            <div class="title">Today</div>
+            <app-task *ngFor="let task of todayTasks" [task]="task" cdkDrag></app-task>
+    </div>
+    <div 
+        class="day" 
+        cdkDropList 
+        #tomorrowList="cdkDropList"
+        [cdkDropListData]="tomorrowTasks"
+        [cdkDropListConnectedTo]="[todayList]"
+        (cdkDropListDropped)="drop($event)">
+            <div class="title">Tomorrow</div>
+            <app-task *ngFor="let task of tomorrowTasks" [task]="task" cdkDrag></app-task>
+    </div>
 </div>

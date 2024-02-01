@@ -6,6 +6,7 @@ import { DashboardPageComponent } from './dashboard-page/dashboard-page.componen
 import { TasksPageComponent } from './tasks-page/tasks-page.component';
 import { SettingsPageComponent } from './settings-page/settings-page.component';
 import { TaskComponent } from './tasks-page/task/task.component';
+import {DragDropModule} from '@angular/cdk/drag-drop';
 
 
 
@@ -19,7 +20,8 @@ import { TaskComponent } from './tasks-page/task/task.component';
   ],
   imports: [
     CommonModule,
-    UserAccountRoutingModule
+    UserAccountRoutingModule,
+    DragDropModule
   ]
 })
 export class UserAccountModule { }

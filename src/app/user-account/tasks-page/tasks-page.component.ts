@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Task } from './task/task.interface';
+import { CdkDragDrop, moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
 
 @Component({
   selector: 'app-tasks-page',
@@ -8,10 +9,11 @@ import { Task } from './task/task.interface';
 })
 export class TasksPageComponent implements OnInit{
 
-  tasks: Task[] = [];
+  todayTasks: Task[] = [];
+  tomorrowTasks: Task[] = [];
 
   ngOnInit(): void {
-    this.tasks = [
+    this.todayTasks = [
       {
         name: 'My first task',
         description: 'Create my firts task in this app',
@@ -26,7 +28,30 @@ export class TasksPageComponent implements OnInit{
         name: 'Clean the house',
         category: 'Chores',
       },
+    ];
+
+    this.tomorrowTasks = [
+      {
+        name: 'Task for tomorrow',
+        description: 'Check if everything was done yesterday',
+        category: 'General',
+      }
     ]
   }
+
+  drop(event: CdkDragDrop<Task[]>) {
+    if (event.previousContainer === event.container) {
+      moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
+    } else {
+      transferArrayItem(
+        event.previousContainer.data,
+        event.container.data,
+        event.previousIndex,
+        event.currentIndex,
+      );
+    }
+  }
+
+
 
 }
