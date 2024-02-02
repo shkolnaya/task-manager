@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { Task } from './task/task.interface';
 import { CdkDragDrop, moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
 import { ThisReceiver } from '@angular/compiler';
+import { TaskService } from './task.service';
+import * as moment from 'moment';
 
 @Component({
   selector: 'app-tasks-page',
@@ -10,72 +12,49 @@ import { ThisReceiver } from '@angular/compiler';
 })
 export class TasksPageComponent implements OnInit{
 
+  constructor(private taskService: TaskService){}
+
   expiredTasks: Task[] = [];
   todayTasks: Task[] = [];
   tomorrowTasks: Task[] = [];
   weekTasks: Task[] = [];
 
   ngOnInit(): void {
-    this.expiredTasks = [
-      {
-        name: 'Expired task',
-        description: 'Start using this app earlier',
-        category: 'Important',
-        date: new Date(2024, 1,1),
-      }
-    ]
-    this.todayTasks = [
-      {
-        name: 'My first task',
-        description: 'Create my firts task in this app',
-        category: 'General',
-        date: new Date(),
-      },
-      {
-        name: 'My second task',
-        description: 'Have my first task done',
-        category: 'General',
-        date: new Date(),
-      },
-      {
-        name: 'Clean the house',
-        category: 'Chores',
-        date: new Date(),
-      },
-    ];
+    this.expiredTasks = this.taskService.getExpiredTasks(); 
+    this.todayTasks = this.taskService.getTodayTasks();
 
-    this.tomorrowTasks = [
-      {
-        name: 'Task for tomorrow',
-        description: 'Check if everything was done yesterday',
-        category: 'General',
-        date: new Date(2024, 1, 3),
-      }
-    ];
+    this.tomorrowTasks = this.taskService.getTomorrowTasks();
 
-    this.weekTasks = [
-      {
-        name: 'Vacation',
-        description: 'Plan trip to Italy',
-        category: 'Holiday',
-        date: new Date(2024, 1, 5),
-      }
-    ]
+    this.weekTasks = this.taskService.getWeekTasks();
   }
 
   drop(event: CdkDragDrop<Task[]>) {
     if (event.previousContainer === event.container) {
       moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
     } else {
+      
       transferArrayItem(
         event.previousContainer.data,
         event.container.data,
         event.previousIndex,
         event.currentIndex,
       );
+
+      if (event.container.id == 'cdk-drop-list-1'){
+        event.container.data[event.currentIndex].date = moment();
+      } 
+      if(event.container.id == 'cdk-drop-list-0'){
+        event.container.data[event.currentIndex].date = moment().add(-1, 'day');
+      }
+      if(event.container.id == 'cdk-drop-list-2'){
+        event.container.data[event.currentIndex].date = moment().add(1, 'day');
+      }
+      
+
     }
   }
 
+  setTodayDate(){}
 
 
 }

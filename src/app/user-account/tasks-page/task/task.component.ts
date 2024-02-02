@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Task } from './task.interface';
+import * as moment from 'moment';
 
 @Component({
   selector: 'app-task',
@@ -18,9 +19,7 @@ export class TaskComponent implements OnInit{
   }
 
   checkExpired(){
-    let today = new Date();
-    today.setHours(0);
-    if (this.task.date < today){
+    if (moment().isAfter(this.task.date, 'day')){
       this.isExpired = true;
     }
   }

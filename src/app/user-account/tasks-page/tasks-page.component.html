@@ -44,7 +44,7 @@
         [cdkDropListData]="weekTasks"
         [cdkDropListConnectedTo]="[todayList, tomorrowList, expiredList]"
         (cdkDropListDropped)="drop($event)">
-            <div class="title">This week</div>
+            <div class="title">Next week</div>
             <app-task *ngFor="let task of weekTasks" [task]="task" cdkDrag></app-task>
     </div>
 </div>
