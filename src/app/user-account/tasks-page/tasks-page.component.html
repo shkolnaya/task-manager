@@ -1,6 +1,6 @@
 <div class="header">
     <div class="title">My tasks</div>
-    <div class="add">+</div>
+    <app-add-task-button></app-add-task-button>
 </div>
 <!-- <div cdkDropList class="tasks" (cdkDropListDropped)="drop($event)">
     <app-task *ngFor="let task of tasks" [task]="task" cdkDrag></app-task>
@@ -10,9 +10,19 @@
     <div 
         class="day" 
         cdkDropList 
+        #expiredList="cdkDropList"
+        [cdkDropListData]="expiredTasks"
+        [cdkDropListConnectedTo]="[tomorrowList, todayList, weekList]"
+        (cdkDropListDropped)="drop($event)">
+            <div class="title">Expired</div>
+            <app-task *ngFor="let task of expiredTasks" [task]="task" cdkDrag></app-task>
+    </div>
+    <div 
+        class="day" 
+        cdkDropList 
         #todayList="cdkDropList"
         [cdkDropListData]="todayTasks"
-        [cdkDropListConnectedTo]="[tomorrowList]"
+        [cdkDropListConnectedTo]="[tomorrowList, expiredList, weekList]"
         (cdkDropListDropped)="drop($event)">
             <div class="title">Today</div>
             <app-task *ngFor="let task of todayTasks" [task]="task" cdkDrag></app-task>
@@ -22,9 +32,19 @@
         cdkDropList 
         #tomorrowList="cdkDropList"
         [cdkDropListData]="tomorrowTasks"
-        [cdkDropListConnectedTo]="[todayList]"
+        [cdkDropListConnectedTo]="[todayList, expiredList, weekList]"
         (cdkDropListDropped)="drop($event)">
             <div class="title">Tomorrow</div>
             <app-task *ngFor="let task of tomorrowTasks" [task]="task" cdkDrag></app-task>
+    </div>
+    <div 
+        class="day" 
+        cdkDropList 
+        #weekList="cdkDropList"
+        [cdkDropListData]="weekTasks"
+        [cdkDropListConnectedTo]="[todayList, tomorrowList, expiredList]"
+        (cdkDropListDropped)="drop($event)">
+            <div class="title">This week</div>
+            <app-task *ngFor="let task of weekTasks" [task]="task" cdkDrag></app-task>
     </div>
 </div>

@@ -11,6 +11,18 @@ export class TaskComponent implements OnInit{
   @Input()
   task: Task;
 
-  ngOnInit(){}
+  isExpired: boolean = false;
+
+  ngOnInit(){
+    this.checkExpired()
+  }
+
+  checkExpired(){
+    let today = new Date();
+    today.setHours(0);
+    if (this.task.date < today){
+      this.isExpired = true;
+    }
+  }
 
 }
