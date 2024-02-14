@@ -4,6 +4,8 @@ import { CdkDragDrop, moveItemInArray, transferArrayItem } from '@angular/cdk/dr
 import { ThisReceiver } from '@angular/compiler';
 import { TaskService } from './task.service';
 import * as moment from 'moment';
+import { MatDialog } from '@angular/material/dialog';
+import { TaskFormComponent } from './task-form/task-form.component';
 
 @Component({
   selector: 'app-tasks-page',
@@ -12,7 +14,8 @@ import * as moment from 'moment';
 })
 export class TasksPageComponent implements OnInit{
 
-  constructor(private taskService: TaskService){}
+
+  constructor(private taskService: TaskService, public dialog: MatDialog){}
 
   expiredTasks: Task[] = [];
   todayTasks: Task[] = [];
@@ -61,6 +64,18 @@ export class TasksPageComponent implements OnInit{
     }
   }
 
+  
+
+  openDialog(): void {
+    const dialogRef = this.dialog.open(TaskFormComponent, {
+      width: '500px'
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      this.taskService.createTask(result);
+      this.processData()
+    });
+  }
 
 
 

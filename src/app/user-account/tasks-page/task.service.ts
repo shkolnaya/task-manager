@@ -13,7 +13,7 @@ export class TaskService {
 
   constructor() {
     const a = moment();
-  }
+  } 
 
   tasks = [
       {
@@ -95,7 +95,7 @@ export class TaskService {
     });
   }
 
-  createTask(task: any){
+  createTask(task: Task){
     console.log(this.tasks);
     this.tasks.push(task)
   }

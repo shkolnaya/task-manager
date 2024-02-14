@@ -1,6 +1,8 @@
 <div class="header">
     <div class="title">My tasks</div>
-    <app-add-task-button></app-add-task-button>
+    <div class="button" (click)="openDialog()">
+        Create a task
+    </div>
 </div>
 <!-- <div cdkDropList class="tasks" (cdkDropListDropped)="drop($event)">
     <app-task *ngFor="let task of tasks" [task]="task" cdkDrag></app-task>

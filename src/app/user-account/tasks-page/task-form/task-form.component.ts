@@ -4,6 +4,7 @@ import { FormControl, FormGroup, NgForm, Validators } from '@angular/forms';
 import * as moment from 'moment';
 import { TaskService } from '../task.service';
 import { Task } from '../task/task.interface';
+import { MatDialogRef } from '@angular/material/dialog';
 
 interface TaskForm {
   name: FormControl<string | null>;
@@ -17,13 +18,9 @@ interface TaskForm {
   templateUrl: './task-form.component.html',
   styleUrls: ['./task-form.component.scss']
 })
-export class TaskFormComponent implements OnInit{
+export class TaskFormComponent implements OnInit {
 
-  @Output()
-  newTaskCreated = new EventEmitter<boolean>();
-
-
-  constructor(private taskService: TaskService) {
+  constructor(public dialogRef: MatDialogRef<TaskFormComponent>) {
   }
 
   taskForm: FormGroup<TaskForm>;
@@ -51,8 +48,8 @@ export class TaskFormComponent implements OnInit{
         category: taskFormValue.category!,
         date: taskFormValue.deadline!
       }
-      this.taskService.createTask(task);
-      this.newTaskCreated.emit(true);
+
+      this.dialogRef.close(task);
     }
   }
 }
