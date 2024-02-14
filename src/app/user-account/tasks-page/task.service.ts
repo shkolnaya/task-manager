@@ -1,17 +1,21 @@
 import { Injectable } from '@angular/core';
 import { Task } from './task/task.interface';
 import * as moment from 'moment';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class TaskService {
 
+  $tasks : Observable<Task[]> = new Observable<Task[]>();
+  
+
   constructor() {
     const a = moment();
   }
 
-  tasks: Task[] = [
+  tasks = [
       {
         name: 'Expired task',
         description: 'Start using this app earlier',
@@ -20,7 +24,7 @@ export class TaskService {
       },
       {
         name: 'My first task',
-        description: 'Create my firts task in this app',
+        description: 'Create my first task in this app',
         category: 'General',
         date: moment(),
       },
@@ -32,6 +36,7 @@ export class TaskService {
       },
       {
         name: 'Clean the house',
+        description: null,
         category: 'Chores',
         date: moment(),
       },
@@ -45,7 +50,7 @@ export class TaskService {
         name: 'Vacation',
         description: 'Plan trip to Italy',
         category: 'Holiday',
-        date: moment('2024-02-07'),
+        date: moment('2024-02-5'),
       }
   ]
 
@@ -78,15 +83,20 @@ export class TaskService {
 
   getNextWeekStart(){
     let todayIndex = moment().isoWeekday();
-    return moment().add((8-todayIndex), 'day')
+    return moment().add((8-todayIndex), 'day');
 
   }
 
   public getWeekTasks(){
     let weekStart = this.getNextWeekStart()
-    let weekEnd = weekStart.add(7, 'day')
+    let weekEnd = moment(weekStart).add(7, 'day')
     return this.tasks.filter(task => {
-      return task.date.isBetween(weekStart, weekEnd, 'day');
+      return task.date.isBetween(weekStart, weekEnd, 'day', '[]');
     });
+  }
+
+  createTask(task: any){
+    console.log(this.tasks);
+    this.tasks.push(task)
   }
 }

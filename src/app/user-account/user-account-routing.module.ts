@@ -4,6 +4,7 @@ import { ContainerComponent } from './container/container.component';
 import { DashboardPageComponent } from './dashboard-page/dashboard-page.component';
 import { TasksPageComponent } from './tasks-page/tasks-page.component';
 import { SettingsPageComponent } from './settings-page/settings-page.component';
+import { ProjectsPageComponent } from './projects-page/projects-page.component';
 
 
 const routes: Routes = [
@@ -13,7 +14,7 @@ const routes: Routes = [
         children: [
             {
                 path: '',
-                redirectTo: 'dashboard',
+                redirectTo: 'tasks',
                 pathMatch: 'full'
             },
             {
@@ -23,6 +24,10 @@ const routes: Routes = [
             {
                 path: 'tasks',
                 component: TasksPageComponent
+            },
+            {
+                path: 'projects',
+                component: ProjectsPageComponent
             },
             {
                 path: 'settings',

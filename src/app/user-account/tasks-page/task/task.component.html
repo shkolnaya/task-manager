@@ -3,7 +3,7 @@
         <div class="category">{{task.category}}</div>
         <div class="name">{{task.name}}</div>
         <div class="desc" *ngIf="task.description">{{task.description}}</div>
-        <div class="date" [class.expired]="isExpired">Deadline: {{task.date.format('ll')}}</div>
+        <div class="date" [class.expired]="isExpired">Deadline: {{task.date | momentDate }}</div>
         <div class="done">Done</div>
     </div>
 </div>

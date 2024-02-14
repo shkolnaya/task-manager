@@ -20,6 +20,11 @@ export class TasksPageComponent implements OnInit{
   weekTasks: Task[] = [];
 
   ngOnInit(): void {
+    this.processData()
+
+  }
+
+  processData(){
     this.expiredTasks = this.taskService.getExpiredTasks(); 
     this.todayTasks = this.taskService.getTodayTasks();
 
@@ -49,12 +54,14 @@ export class TasksPageComponent implements OnInit{
       if(event.container.id == 'cdk-drop-list-2'){
         event.container.data[event.currentIndex].date = moment().add(1, 'day');
       }
+      if(event.container.id == 'cdk-drop-list-3'){
+        event.container.data[event.currentIndex].date = this.taskService.getNextWeekStart();
+      }
       
-
     }
   }
 
-  setTodayDate(){}
+
 
 
 }

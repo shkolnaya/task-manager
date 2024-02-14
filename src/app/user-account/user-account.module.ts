@@ -15,10 +15,28 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { MatNativeDateModule } from '@angular/material/core';
+import { DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE, MatDateFormats, MatNativeDateModule } from '@angular/material/core';
 import {MatDatepickerModule} from '@angular/material/datepicker';
+import {MatSelectModule} from '@angular/material/select';
+import { MomentDatePipe } from './moment-date.pipe';
+import { MomentDateAdapter } from '@angular/material-moment-adapter';
+import { ProjectsPageComponent } from './projects-page/projects-page.component';
+import { ProjectComponent } from './projects-page/project/project.component';
+import { AddProjectButtonComponent } from './projects-page/add-project-button/add-project-button.component';
 
+const dateFormat = 'MMM D, YYYY'
 
+const dateFormats: MatDateFormats = {
+  parse: {
+    dateInput: [dateFormat]
+  },
+  display: {
+      dateInput: dateFormat,
+      monthYearLabel: 'MMM YYYY',
+      dateA11yLabel: 'LL',
+      monthYearA11yLabel: 'MMMM YYYY',
+  } 
+}
 
 @NgModule({
   declarations: [
@@ -29,6 +47,10 @@ import {MatDatepickerModule} from '@angular/material/datepicker';
     TaskComponent,
     AddTaskButtonComponent,
     TaskFormComponent,
+    MomentDatePipe,
+    ProjectsPageComponent,
+    ProjectComponent,
+    AddProjectButtonComponent,
   ],
   imports: [
     CommonModule,
@@ -43,6 +65,11 @@ import {MatDatepickerModule} from '@angular/material/datepicker';
     ReactiveFormsModule,
     MatNativeDateModule,
     MatDatepickerModule,
+    MatSelectModule
+  ],
+  providers: [
+    {provide: DateAdapter, useClass: MomentDateAdapter, deps: [MAT_DATE_LOCALE]},
+    {provide: MAT_DATE_FORMATS, useValue: dateFormats},
   ]
 })
 export class UserAccountModule { }

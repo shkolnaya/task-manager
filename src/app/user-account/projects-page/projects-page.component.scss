@@ -1,0 +1,27 @@
+
+:host {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+.header{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    color: rgb(221, 220, 220);
+    margin-bottom: 30px;
+
+    .title{
+
+        font-size: 32px;
+        font-weight: 700;
+    }
+}
+
+.content{
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+}

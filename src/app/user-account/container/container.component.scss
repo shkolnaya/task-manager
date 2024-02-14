@@ -17,6 +17,8 @@
         width: 100px;
         height: 100px;
         margin: 50px 0;
+        color: white;
+        font-weight: 600;
     }
 
     .nav{
@@ -25,12 +27,19 @@
         flex-direction: column;
 
         .item{
-            color: #bb0c75;
-            padding: 10px 5px;
+            color: white;
+            padding: 10px 20px;
             border-radius: 8px;
+            display: flex;
+            align-items: center;
 
             &:hover{
                 background-color: rgba(255, 255, 255, 0.207);
+            }
+
+            img{
+                width: 25px;
+                margin-right: 20px;
             }
 
 

@@ -2,7 +2,7 @@ import { Moment } from "moment";
 
 export interface Task {
     name: string;
-    description?: string;
+    description: string | null;
     category: string;
     date: Moment;
 }

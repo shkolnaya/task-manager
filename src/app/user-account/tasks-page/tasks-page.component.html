@@ -6,6 +6,8 @@
     <app-task *ngFor="let task of tasks" [task]="task" cdkDrag></app-task>
 </div> -->
 
+<!-- {{expiredTasks | json}} -->
+
 <div class="content">
     <div 
         class="day" 
@@ -45,6 +47,6 @@
         [cdkDropListConnectedTo]="[todayList, tomorrowList, expiredList]"
         (cdkDropListDropped)="drop($event)">
             <div class="title">Next week</div>
-            <app-task *ngFor="let task of weekTasks" [task]="task" cdkDrag></app-task>
+            <app-task *ngFor="let task of weekTasks" [task]="task" class="task" cdkDrag></app-task>
     </div>
 </div>
