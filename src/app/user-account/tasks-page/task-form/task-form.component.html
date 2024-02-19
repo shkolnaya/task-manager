@@ -1,15 +1,10 @@
 <form class="create" [formGroup]="taskForm" (ngSubmit)="onTaskSubmit()">
-  <h1 mat-dialog-title>New task</h1>
   <div mat-dialog-content>
     <p>What do you plan to do?</p>
     <div class="form">
       <mat-form-field appearance="fill">
         <mat-label>Task name</mat-label>
         <input matInput formControlName="name">
-      </mat-form-field>
-      <mat-form-field appearance="fill">
-        <mat-label>Task description</mat-label>
-        <input matInput>
       </mat-form-field>
       <mat-form-field appearance="fill">
         <mat-label>Select</mat-label>
@@ -20,11 +15,15 @@
       </mat-form-field>
       <mat-form-field appearance="fill">
         <mat-label>Deadline</mat-label>
-        <input formControlName="deadline" matInput [matDatepicker]="picker">
-        <mat-hint>MM/DD/YYYY</mat-hint>
+        <input formControlName="date" matInput [matDatepicker]="picker">
         <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
         <mat-datepicker #picker></mat-datepicker>
       </mat-form-field>
+      <mat-form-field appearance="fill">
+        <mat-label>Task description</mat-label>
+        <textarea matInput></textarea>
+      </mat-form-field>
+
     </div>
 
   </div>

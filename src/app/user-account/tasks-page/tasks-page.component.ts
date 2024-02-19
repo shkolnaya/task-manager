@@ -64,11 +64,27 @@ export class TasksPageComponent implements OnInit{
     }
   }
 
+  createTask(): void {
+    const newTask = {
+
+    } as Task;
+
+    this.openEditTaskDialog(newTask);
+
+  }
+
+  editTask(editTask: Task): void {
+    const task = {...editTask};
+
+    this.openEditTaskDialog(task);
+  }
+  
   
 
-  openDialog(): void {
+  openEditTaskDialog(currentTask: Task): void {
     const dialogRef = this.dialog.open(TaskFormComponent, {
-      width: '500px'
+      width: '500px',
+      data: currentTask
     });
 
     dialogRef.afterClosed().subscribe(result => {
@@ -76,6 +92,8 @@ export class TasksPageComponent implements OnInit{
       this.processData()
     });
   }
+
+
 
 
 

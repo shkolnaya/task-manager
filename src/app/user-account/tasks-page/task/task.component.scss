@@ -19,6 +19,7 @@
     width: 100%;
     border-radius: 8px;
     margin: 3px;
+    position: relative;
 
     .category{
         background-color: #eb41a737;
@@ -37,7 +38,10 @@
     }
 
     .desc{
-        color: rgb(167, 167, 167)
+        color: rgb(167, 167, 167);
+        max-height: 40px;
+        overflow: hidden;
+        text-overflow: clip;
     }
 
     .date{
@@ -70,6 +74,21 @@
         
         &:hover{
             color: #d611f4;
+        }
+    }
+
+    .edit{
+        position: absolute;
+        top: 20px;
+        right: 5px;
+        cursor: pointer;
+        img{
+            height: 30px;
+            opacity: 50%;
+
+            &:hover{
+                opacity: 1;
+            }
         }
     }
 }

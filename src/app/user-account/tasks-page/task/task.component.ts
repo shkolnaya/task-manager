@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Task } from './task.interface';
 import * as moment from 'moment';
 
@@ -12,6 +12,9 @@ export class TaskComponent implements OnInit{
   @Input()
   task: Task;
 
+  @Output()
+  editClick = new EventEmitter<void>();
+
   isExpired: boolean = false;
 
   ngOnInit(){
@@ -22,6 +25,10 @@ export class TaskComponent implements OnInit{
     if (moment().isAfter(this.task.date, 'day')){
       this.isExpired = true;
     }
+  }
+
+  emitEdit(): void {
+    this.editClick.emit();
   }
 
 }

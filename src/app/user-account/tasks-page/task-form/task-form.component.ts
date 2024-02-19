@@ -1,16 +1,16 @@
 
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Inject, Input, OnInit, Output } from '@angular/core';
 import { FormControl, FormGroup, NgForm, Validators } from '@angular/forms';
 import * as moment from 'moment';
 import { TaskService } from '../task.service';
 import { Task } from '../task/task.interface';
-import { MatDialogRef } from '@angular/material/dialog';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 
 interface TaskForm {
   name: FormControl<string | null>;
   description: FormControl<string | null>;
   category: FormControl<string | null>;
-  deadline: FormControl<moment.Moment | null>;
+  date: FormControl<moment.Moment | null>;
 }
 
 @Component({
@@ -20,7 +20,12 @@ interface TaskForm {
 })
 export class TaskFormComponent implements OnInit {
 
-  constructor(public dialogRef: MatDialogRef<TaskFormComponent>) {
+  @Input()
+  taskToEdit: Task
+
+  constructor(
+    public dialogRef: MatDialogRef<TaskFormComponent>,
+    @Inject(MAT_DIALOG_DATA) public data: Task) {
   }
 
   taskForm: FormGroup<TaskForm>;
@@ -30,13 +35,15 @@ export class TaskFormComponent implements OnInit {
   // deadline: moment.Moment;
 
 
-  ngOnInit(): void {
+  ngOnInit(): void {    
     this.taskForm = new FormGroup<TaskForm>({
       name: new FormControl<string>('', Validators.required),
       description: new FormControl(''),
       category: new FormControl('one'),
-      deadline: new FormControl(moment())
-    })
+      date: new FormControl(moment())
+    });
+
+    this.taskForm.patchValue(this.data);
   }
 
   onTaskSubmit(){
@@ -46,7 +53,7 @@ export class TaskFormComponent implements OnInit {
         name: taskFormValue.name!,
         description: taskFormValue.description,
         category: taskFormValue.category!,
-        date: taskFormValue.deadline!
+        date: taskFormValue.date!
       }
 
       this.dialogRef.close(task);

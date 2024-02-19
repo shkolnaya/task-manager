@@ -1,6 +1,6 @@
 <div class="header">
     <div class="title">My tasks</div>
-    <div class="button" (click)="openDialog()">
+    <div class="button" (click)="createTask()">
         Create a task
     </div>
 </div>
@@ -19,7 +19,7 @@
         [cdkDropListConnectedTo]="[tomorrowList, todayList, weekList]"
         (cdkDropListDropped)="drop($event)">
             <div class="title">Expired</div>
-            <app-task *ngFor="let task of expiredTasks" [task]="task" cdkDrag></app-task>
+            <app-task *ngFor="let task of expiredTasks" (editClick)="editTask(task)" [task]="task" cdkDrag></app-task>
     </div>
     <div 
         class="day" 
@@ -29,7 +29,7 @@
         [cdkDropListConnectedTo]="[tomorrowList, expiredList, weekList]"
         (cdkDropListDropped)="drop($event)">
             <div class="title">Today</div>
-            <app-task *ngFor="let task of todayTasks" [task]="task" cdkDrag></app-task>
+            <app-task *ngFor="let task of todayTasks" (editClick)="editTask(task)" [task]="task" cdkDrag></app-task>
     </div>
     <div 
         class="day" 
@@ -39,7 +39,7 @@
         [cdkDropListConnectedTo]="[todayList, expiredList, weekList]"
         (cdkDropListDropped)="drop($event)">
             <div class="title">Tomorrow</div>
-            <app-task *ngFor="let task of tomorrowTasks" [task]="task" cdkDrag></app-task>
+            <app-task *ngFor="let task of tomorrowTasks" (editClick)="editTask(task)" [task]="task" cdkDrag></app-task>
     </div>
     <div 
         class="day" 
@@ -49,6 +49,6 @@
         [cdkDropListConnectedTo]="[todayList, tomorrowList, expiredList]"
         (cdkDropListDropped)="drop($event)">
             <div class="title">Next week</div>
-            <app-task *ngFor="let task of weekTasks" [task]="task" class="task" cdkDrag></app-task>
+            <app-task *ngFor="let task of weekTasks" (editClick)="editTask(task)" [task]="task" class="task" cdkDrag></app-task>
     </div>
 </div>
