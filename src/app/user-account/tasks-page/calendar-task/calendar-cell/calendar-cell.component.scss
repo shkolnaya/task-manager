@@ -1,0 +1,48 @@
+:host{
+    display: block;
+    color: white;
+    border: 1px solid rgba(255, 255, 255, 0.4);
+    width: 100%;
+
+    text-align: center;
+
+
+}
+
+.container{
+    width: 100%;
+    height: 100%;
+    box-sizing: border-box;
+    padding: 20px 0;
+}
+
+.not-current-month{
+    opacity: 40%;
+}
+
+.today{
+    background-color: #eb41a712;
+}
+
+.substrate{
+    background: linear-gradient(68deg, #c87dd4, #690176, #BB0C75, #d511f4);
+    box-shadow: 0px 0px 3px 1px #d611f4a7;
+    display: flex;
+    justify-content: center;
+    border-radius: 8px;
+    margin: 5px;
+    &:hover{
+        box-shadow: 0px 0px 10px 3px #d611f4a7; 
+    }
+};
+
+
+.card{
+    background-color:  rgb(30, 29, 29);
+    padding: 10px;
+    color: rgb(223, 222, 222);
+    width: 100%;
+    border-radius: 8px;
+    margin: 1px;
+
+}

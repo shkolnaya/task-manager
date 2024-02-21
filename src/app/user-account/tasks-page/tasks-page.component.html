@@ -1,8 +1,17 @@
 <div class="header">
     <div class="title">My tasks</div>
-    <div class="button" (click)="createTask()">
-        Create a task
+    <div class="buttons">
+        <div class="button">
+            <img src="/assets/icons/calendar (1).png">
+        </div>
+        <div class="button">
+            <img src="/assets/icons/layout.png">
+        </div>
+        <div class="button" (click)="createTask()">
+            Create a task
+        </div>
     </div>
+
 </div>
 <!-- <div cdkDropList class="tasks" (cdkDropListDropped)="drop($event)">
     <app-task *ngFor="let task of tasks" [task]="task" cdkDrag></app-task>

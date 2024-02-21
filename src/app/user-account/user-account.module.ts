@@ -22,6 +22,10 @@ import { MomentDateAdapter } from '@angular/material-moment-adapter';
 import { ProjectsPageComponent } from './projects-page/projects-page.component';
 import { ProjectComponent } from './projects-page/project/project.component';
 import { AddProjectButtonComponent } from './projects-page/add-project-button/add-project-button.component';
+import { CalendarTaskComponent } from './tasks-page/calendar-task/calendar-task.component';
+import {MatTableModule} from '@angular/material/table';
+import { CalendarCellComponent } from './tasks-page/calendar-task/calendar-cell/calendar-cell.component';
+import { TaskFilterPipe } from './tasks-page/calendar-task/task-filter.pipe';
 
 const dateFormat = 'MMM D, YYYY'
 
@@ -49,6 +53,9 @@ const dateFormats: MatDateFormats = {
     ProjectsPageComponent,
     ProjectComponent,
     AddProjectButtonComponent,
+    CalendarTaskComponent,
+    CalendarCellComponent,
+    TaskFilterPipe,
   ],
   imports: [
     CommonModule,
@@ -63,7 +70,8 @@ const dateFormats: MatDateFormats = {
     ReactiveFormsModule,
     MatNativeDateModule,
     MatDatepickerModule,
-    MatSelectModule
+    MatSelectModule,
+    MatTableModule
   ],
   providers: [
     {provide: DateAdapter, useClass: MomentDateAdapter, deps: [MAT_DATE_LOCALE]},

@@ -53,7 +53,8 @@ export class TaskFormComponent implements OnInit {
         name: taskFormValue.name!,
         description: taskFormValue.description,
         category: taskFormValue.category!,
-        date: taskFormValue.date!
+        date: taskFormValue.date!,
+        isDone: false,
       }
 
       this.dialogRef.close(task);

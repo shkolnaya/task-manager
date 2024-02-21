@@ -20,37 +20,43 @@ export class TaskService {
         name: 'Expired task',
         description: 'Start using this app earlier',
         category: 'Important',
-        date: moment('2024-01-01')
+        date: moment('2024-01-01'),
+        isDone: false,
       },
       {
         name: 'My first task',
         description: 'Create my first task in this app',
         category: 'General',
         date: moment(),
+        isDone: false,
       },
       {
         name: 'My second task',
         description: 'Have my first task done',
         category: 'General',
         date: moment(),
+        isDone: false,
       },
       {
         name: 'Clean the house',
         description: null,
         category: 'Chores',
         date: moment(),
+        isDone: false,
       },
       {
         name: 'Task for tomorrow',
         description: 'Check if everything was done yesterday',
         category: 'General',
         date: moment('2024-02-03'),
+        isDone: false,
       },
       {
         name: 'Vacation',
         description: 'Plan trip to Italy',
         category: 'Holiday',
         date: moment('2024-02-5'),
+        isDone: false,
       }
   ]
 
@@ -58,6 +64,10 @@ export class TaskService {
   todayTasks: Task[]
   tomorrowTasks: Task[]
   weekTasks: Task[]
+
+  public getAllTasks(){
+    return this.tasks
+  };
 
   public getExpiredTasks(){
     let today = moment();

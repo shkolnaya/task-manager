@@ -1,0 +1,17 @@
+<div class="container"
+    [class.not-current-month]="!isCurrentMonth" 
+    [class.today]="isToday"
+    cdkDropList  
+    (cdkDropListDropped)="drop($event)"
+    [cdkDropListData]="tasks"
+>
+    {{date.format('D')}}
+    <div class="task" *ngFor="let task of tasks" cdkDrag>
+        <div class="substrate">
+            <div class="card">
+                {{task.name}}
+            </div>
+        </div>
+
+    </div>
+</div>

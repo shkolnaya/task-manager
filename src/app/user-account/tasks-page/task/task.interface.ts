@@ -5,4 +5,5 @@ export interface Task {
     description: string | null;
     category: string;
     date: Moment;
+    isDone: boolean;
 }

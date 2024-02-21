@@ -16,6 +16,7 @@ import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { RegistrationComponent } from './home-page/forms/registration/registration.component';
 
+
 @NgModule({
   declarations: [
     AppComponent,

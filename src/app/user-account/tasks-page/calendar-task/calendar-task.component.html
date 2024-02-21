@@ -1,0 +1,12 @@
+<div class="header">
+        <div class="day-name" *ngFor="let day of daysOfWeek">
+            {{day}}
+        </div>
+</div>
+
+
+<div class="calendar" cdkDropListGroup>
+    <app-calendar-cell class="dates" *ngFor="let date of dates" [date]="date" [tasks]=" tasks | taskFilter: date">
+        
+    </app-calendar-cell>
+</div>

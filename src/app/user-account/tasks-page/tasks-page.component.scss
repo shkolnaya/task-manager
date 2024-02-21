@@ -23,6 +23,11 @@
         font-weight: 700;
     }
 
+    .buttons{
+      display: flex;
+      gap: 5px;
+    }
+
     .button {
         --black: #000000;
         --ch-black: #141414;
@@ -32,7 +37,6 @@
         --af-white: #f3f3f3;
         --ch-white: #e1e1e1;
         border-radius: 8px;
-        width: 140px;
         height: 40px;
         display: flex;
         align-items: center;
@@ -46,6 +50,10 @@
         font-weight: 700;
         transition-duration: .2s;
         background-color: var(--ch-black);
+
+        img{
+          height: 20px;
+        }
       }
       
       .button:before, .button:after {
