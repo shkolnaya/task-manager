@@ -28,6 +28,8 @@ import { CalendarCellComponent } from './tasks-page/calendar-task/calendar-cell/
 import { TaskFilterPipe } from './tasks-page/calendar-task/task-filter.pipe';
 import { TableTaskComponent } from './tasks-page/table-task/table-task.component';
 import { MatSortModule } from '@angular/material/sort';
+import { ProjectTasksComponent } from './projects-page/project-tasks/project-tasks.component';
+import { ProjectNamePipe } from './project-name.pipe';
 
 const dateFormat = 'MMM D, YYYY'
 
@@ -59,6 +61,8 @@ const dateFormats: MatDateFormats = {
     CalendarCellComponent,
     TaskFilterPipe,
     TableTaskComponent,
+    ProjectTasksComponent,
+    ProjectNamePipe,
   ],
   imports: [
     CommonModule,

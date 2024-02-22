@@ -33,7 +33,7 @@ export class TableTaskComponent implements OnInit, AfterViewInit {
   @Input()
   tasks: Task[];
 
-  displayedColumns: string[] = ['name', 'category', 'date'];
+  displayedColumns: string[] = ['name', 'project', 'date'];
   dataSource: any;
  
   constructor(private _liveAnnouncer: LiveAnnouncer) {}

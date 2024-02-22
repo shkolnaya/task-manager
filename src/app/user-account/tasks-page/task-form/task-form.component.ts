@@ -6,11 +6,13 @@ import { TaskService } from '../task.service';
 import { Task } from '../task/task.interface';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { DialogResult } from '../dialog-result';
+import { ProjectsService } from '../../projects-page/projects.service';
+import { Project } from '../../projects-page/project.interface';
 
 interface TaskForm {
   name: FormControl<string | null>;
   description: FormControl<string | null>;
-  category: FormControl<string | null>;
+  project: FormControl<number | null>;
   date: FormControl<moment.Moment | null>;
 }
 
@@ -25,8 +27,9 @@ export class TaskFormComponent implements OnInit {
   taskToEdit: Task
 
   constructor(
+    private projectService: ProjectsService, 
     public dialogRef: MatDialogRef<TaskFormComponent, DialogResult<Task>>,
-    @Inject(MAT_DIALOG_DATA) public data: Task) {
+    @Inject(MAT_DIALOG_DATA) public data: any) {
       dialogRef.disableClose = true;
       dialogRef.backdropClick().subscribe(x=> {
         const a = confirm('Are you sure?');
@@ -44,16 +47,20 @@ export class TaskFormComponent implements OnInit {
   // cat: string;
   // deadline: moment.Moment;
 
+  projects: Project[];
 
   ngOnInit(): void {    
+
+
     this.taskForm = new FormGroup<TaskForm>({
       name: new FormControl<string>('', Validators.required),
       description: new FormControl(''),
-      category: new FormControl('one'),
+      project: new FormControl(1),
       date: new FormControl(moment())
     });
 
-    this.taskForm.patchValue(this.data);
+    this.taskForm.patchValue(this.data.task);
+    this.projects = this.data.projects;
   }
 
   submit() {
@@ -62,7 +69,7 @@ export class TaskFormComponent implements OnInit {
       const task: Task = {
         name: taskFormValue.name!,
         description: taskFormValue.description,
-        category: taskFormValue.category!,
+        project: taskFormValue.project!,
         date: taskFormValue.date!,
         isDone: false,
       }
@@ -86,7 +93,7 @@ export class TaskFormComponent implements OnInit {
       const task: Task = {
         name: taskFormValue.name!,
         description: taskFormValue.description,
-        category: taskFormValue.category!,
+        project: taskFormValue.project!,
         date: taskFormValue.date!,
         isDone: false,
       }

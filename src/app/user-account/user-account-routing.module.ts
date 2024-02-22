@@ -5,6 +5,7 @@ import { DashboardPageComponent } from './dashboard-page/dashboard-page.componen
 import { TasksPageComponent } from './tasks-page/tasks-page.component';
 import { SettingsPageComponent } from './settings-page/settings-page.component';
 import { ProjectsPageComponent } from './projects-page/projects-page.component';
+import { ProjectTasksComponent } from './projects-page/project-tasks/project-tasks.component';
 
 
 const routes: Routes = [
@@ -28,6 +29,10 @@ const routes: Routes = [
             {
                 path: 'projects',
                 component: ProjectsPageComponent
+            },
+            {
+                path: 'projects/:id', 
+                component: ProjectTasksComponent
             },
             {
                 path: 'settings',

@@ -1,6 +1,6 @@
 <div class="substrate">
     <div class="card">
-        <div class="category">{{task.category}}</div>
+        <div class="category">{{task.project | projectName}}</div>
         <div class="name">{{task.name}}</div>
         <div class="desc" *ngIf="task.description">{{task.description}}</div>
         <div class="date" [class.expired]="isExpired">Deadline: {{task.date | momentDate }}</div>

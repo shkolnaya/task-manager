@@ -19,42 +19,42 @@ export class TaskService {
       {
         name: 'Expired task',
         description: 'Start using this app earlier',
-        category: 'Important',
+        project: 1,
         date: moment('2024-01-01'),
         isDone: false,
       },
       {
         name: 'My first task',
         description: 'Create my first task in this app',
-        category: 'General',
+        project: 1,
         date: moment(),
         isDone: false,
       },
       {
         name: 'My second task',
         description: 'Have my first task done',
-        category: 'General',
+        project: 3,
         date: moment(),
         isDone: false,
       },
       {
         name: 'Clean the house',
         description: null,
-        category: 'Chores',
+        project: 2,
         date: moment(),
         isDone: false,
       },
       {
         name: 'Task for tomorrow',
         description: 'Check if everything was done yesterday',
-        category: 'General',
+        project: 3,
         date: moment('2024-02-03'),
         isDone: false,
       },
       {
         name: 'Vacation',
         description: 'Plan trip to Italy',
-        category: 'Holiday',
+        project: 2,
         date: moment('2024-02-5'),
         isDone: false,
       }
@@ -91,6 +91,12 @@ export class TaskService {
 
   }
 
+  public getProjectTasks(projectId: number): Task[]{
+    return this.tasks.filter(task=>{
+      return task.project = projectId
+    })
+  }
+
   getNextWeekStart(){
     let todayIndex = moment().isoWeekday();
     return moment().add((8-todayIndex), 'day');
@@ -106,7 +112,6 @@ export class TaskService {
   }
 
   createTask(task: Task){
-    console.log(this.tasks);
     this.tasks.push(task)
   }
 }

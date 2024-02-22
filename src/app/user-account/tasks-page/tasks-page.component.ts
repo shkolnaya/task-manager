@@ -7,6 +7,8 @@ import * as moment from 'moment';
 import { MatDialog } from '@angular/material/dialog';
 import { TaskFormComponent } from './task-form/task-form.component';
 import { DialogResult } from './dialog-result';
+import { ProjectsService } from '../projects-page/projects.service';
+import { Project } from '../projects-page/project.interface';
 
 enum ViewType {
   Grid,
@@ -22,7 +24,7 @@ enum ViewType {
 export class TasksPageComponent implements OnInit{
 
 
-  constructor(private taskService: TaskService, public dialog: MatDialog){}
+  constructor(private taskService: TaskService, public dialog: MatDialog, private projectService: ProjectsService){}
 
   viewTypes = ViewType;  
   viewType:  ViewType;
@@ -32,7 +34,11 @@ export class TasksPageComponent implements OnInit{
   tomorrowTasks: Task[] = [];
   weekTasks: Task[] = [];
 
+  projects: Project[];
+
   ngOnInit(): void {
+    this.projects = this.projectService.getProjects()
+
     this.processData()
 
     this.viewType = ViewType.Grid;
@@ -94,9 +100,12 @@ export class TasksPageComponent implements OnInit{
   
 
   openEditTaskDialog(currentTask: Task): void {
-    const dialogRef = this.dialog.open<TaskFormComponent, Task, DialogResult<Task>>(TaskFormComponent, {
+    const dialogRef = this.dialog.open<TaskFormComponent, any, DialogResult<Task>>(TaskFormComponent, {
       width: '500px',
-      data: currentTask
+      data: {
+        task: currentTask,
+        projects: this.projects,
+      }
     });
 
     dialogRef.afterClosed().subscribe(result => {
