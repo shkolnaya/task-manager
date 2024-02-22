@@ -6,6 +6,13 @@ import { TaskService } from './task.service';
 import * as moment from 'moment';
 import { MatDialog } from '@angular/material/dialog';
 import { TaskFormComponent } from './task-form/task-form.component';
+import { DialogResult } from './dialog-result';
+
+enum ViewType {
+  Grid,
+  Calendar,
+  List
+}
 
 @Component({
   selector: 'app-tasks-page',
@@ -17,6 +24,9 @@ export class TasksPageComponent implements OnInit{
 
   constructor(private taskService: TaskService, public dialog: MatDialog){}
 
+  viewTypes = ViewType;  
+  viewType:  ViewType;
+
   expiredTasks: Task[] = [];
   todayTasks: Task[] = [];
   tomorrowTasks: Task[] = [];
@@ -24,6 +34,8 @@ export class TasksPageComponent implements OnInit{
 
   ngOnInit(): void {
     this.processData()
+
+    this.viewType = ViewType.Grid;
 
   }
 
@@ -82,18 +94,24 @@ export class TasksPageComponent implements OnInit{
   
 
   openEditTaskDialog(currentTask: Task): void {
-    const dialogRef = this.dialog.open(TaskFormComponent, {
+    const dialogRef = this.dialog.open<TaskFormComponent, Task, DialogResult<Task>>(TaskFormComponent, {
       width: '500px',
       data: currentTask
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      this.taskService.createTask(result);
-      this.processData()
+      switch(result?.action) {
+        case 'Submit':
+          if (result.data) {
+            this.taskService.createTask(result.data);
+            this.processData();
+          }           
+          break;
+        default:
+          break;
+      }
     });
   }
-
-
 
 
 

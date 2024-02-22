@@ -28,7 +28,7 @@
 
   </div>
   <div mat-dialog-actions>
-    <button mat-button>No Thanks</button>
-    <button mat-button type="submit" [mat-dialog-close] cdkFocusInitial>Ok</button>
+    <button mat-button (click)="cancel()">No Thanks</button>
+    <button mat-button type="submit" (click)="submit()" cdkFocusInitial>Ok</button>
   </div>
 </form>

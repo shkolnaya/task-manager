@@ -26,6 +26,8 @@ import { CalendarTaskComponent } from './tasks-page/calendar-task/calendar-task.
 import {MatTableModule} from '@angular/material/table';
 import { CalendarCellComponent } from './tasks-page/calendar-task/calendar-cell/calendar-cell.component';
 import { TaskFilterPipe } from './tasks-page/calendar-task/task-filter.pipe';
+import { TableTaskComponent } from './tasks-page/table-task/table-task.component';
+import { MatSortModule } from '@angular/material/sort';
 
 const dateFormat = 'MMM D, YYYY'
 
@@ -56,6 +58,7 @@ const dateFormats: MatDateFormats = {
     CalendarTaskComponent,
     CalendarCellComponent,
     TaskFilterPipe,
+    TableTaskComponent,
   ],
   imports: [
     CommonModule,
@@ -71,7 +74,8 @@ const dateFormats: MatDateFormats = {
     MatNativeDateModule,
     MatDatepickerModule,
     MatSelectModule,
-    MatTableModule
+    MatTableModule,
+    MatSortModule
   ],
   providers: [
     {provide: DateAdapter, useClass: MomentDateAdapter, deps: [MAT_DATE_LOCALE]},

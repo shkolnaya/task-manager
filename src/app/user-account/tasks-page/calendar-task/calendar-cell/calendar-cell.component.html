@@ -6,7 +6,7 @@
     [cdkDropListData]="tasks"
 >
     {{date.format('D')}}
-    <div class="task" *ngFor="let task of tasks" cdkDrag>
+    <div class="task" *ngFor="let task of tasks" (click)="editTask(task)" cdkDrag>
         <div class="substrate">
             <div class="card">
                 {{task.name}}
