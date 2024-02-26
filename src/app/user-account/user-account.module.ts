@@ -30,6 +30,8 @@ import { TableTaskComponent } from './tasks-page/table-task/table-task.component
 import { MatSortModule } from '@angular/material/sort';
 import { ProjectTasksComponent } from './projects-page/project-tasks/project-tasks.component';
 import { ProjectNamePipe } from './project-name.pipe';
+import { PickIconComponent } from './projects-page/pick-icon/pick-icon.component';
+import { ProjectFormComponent } from './projects-page/project-form/project-form.component';
 
 const dateFormat = 'MMM D, YYYY'
 
@@ -63,6 +65,8 @@ const dateFormats: MatDateFormats = {
     TableTaskComponent,
     ProjectTasksComponent,
     ProjectNamePipe,
+    PickIconComponent,
+    ProjectFormComponent,
   ],
   imports: [
     CommonModule,

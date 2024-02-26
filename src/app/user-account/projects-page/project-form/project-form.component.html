@@ -1,0 +1,20 @@
+<form class="create" [formGroup]="projectForm">
+    <div mat-dialog-content>
+      <p>What a great project do you have?</p>
+      <div class="form">
+        <mat-form-field appearance="fill">
+          <mat-label>Task name</mat-label>
+          <input matInput formControlName="name">
+        </mat-form-field>
+        
+        <app-pick-icon formControlName="icon"></app-pick-icon>
+  
+      </div>
+  
+    </div>
+    <div mat-dialog-actions>
+      <button mat-button (click)="cancel()">No Thanks</button>
+      <button mat-button type="submit" (click)="submit()" [disabled]="!projectForm.valid" cdkFocusInitial>Ok</button>
+    </div>
+  </form>
+  

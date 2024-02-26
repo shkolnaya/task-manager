@@ -1,0 +1,27 @@
+:host {
+    display: flex;
+    column-gap: 5px;
+    flex-wrap: wrap;
+    color: white;
+
+    &>div {
+        cursor: pointer;
+        border-radius: 8px;
+        // flex: 20%;
+        justify-content: center;
+        align-items: center;
+
+        .mat-icon{
+            font-size: 34px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 50px;
+            height: 50px;
+        }
+
+        &.selected, &:hover {
+            background-color: rgba(255, 255, 255, 0.207);
+        }
+    }
+}

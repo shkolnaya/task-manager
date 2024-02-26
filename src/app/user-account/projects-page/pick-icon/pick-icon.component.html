@@ -1,0 +1,6 @@
+<div 
+    [class.selected]="icon.selected"
+    *ngFor="let icon of icons"
+    (click)="selectIcon(icon)">
+    <mat-icon  [fontIcon]="icon.name"></mat-icon>
+</div>

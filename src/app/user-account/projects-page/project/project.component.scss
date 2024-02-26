@@ -14,12 +14,17 @@
         box-shadow: 0px 0px 10px 3px #ff00ee85; 
     }
 
-    img{
-        margin-bottom: 10px;
-        width: 60px;
+    .mat-icon{
+        font-size: 46px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 50px;
+        height: 50px;
     }
 
     .name{
+        margin-top: 10px;
         color: white;
         font-size: 20px;
     }

@@ -1,4 +1,4 @@
 <div class="card" [routerLink]="['/user/projects', project.id]">
-    <img src="/assets/icons/clock.svg">
+    <mat-icon  [fontIcon]="project.icon"></mat-icon>
     <div class="name">{{project.name}}</div>
 </div>

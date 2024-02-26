@@ -1,4 +1,4 @@
-<form class="create" [formGroup]="taskForm" (ngSubmit)="onTaskSubmit()">
+<form class="create" [formGroup]="taskForm">
   <div mat-dialog-content>
     <p>What do you plan to do?</p>
     <div class="form">
@@ -21,7 +21,7 @@
       </mat-form-field>
       <mat-form-field appearance="fill">
         <mat-label>Task description</mat-label>
-        <textarea matInput></textarea>
+        <textarea formControlName="description" matInput></textarea>
       </mat-form-field>
 
     </div>

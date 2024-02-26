@@ -12,17 +12,17 @@ export class ProjectsService {
     {
       id: 1,
       name: 'General',
-      img: '/assets/icons/clock.svg'
+      icon: 'group'
     },
     {
       id: 2,
       name: 'Holiday',
-      img: '/assets/icons/clock.svg'
+      icon: 'flight'
     },
     {
       id: 3,
       name: 'Learning',
-      img: '/assets/icons/clock.svg'
+      icon: 'school'
     },
 
   ]
@@ -36,8 +36,15 @@ export class ProjectsService {
   }
 
   getProjectName(id: number){
-    return this.projects.find(project => project.id === id)?.name
+    return this.projects.find(project => project.id == id)?.name
   }
 
+  getNextId(): number{
+    return this.projects.length + 1;
+  }
+
+  createProject(project: Project){
+    this.projects.push(project)
+  }
 
 }

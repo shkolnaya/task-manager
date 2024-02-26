@@ -50,8 +50,6 @@ export class TaskFormComponent implements OnInit {
   projects: Project[];
 
   ngOnInit(): void {    
-
-
     this.taskForm = new FormGroup<TaskForm>({
       name: new FormControl<string>('', Validators.required),
       description: new FormControl(''),
@@ -87,21 +85,4 @@ export class TaskFormComponent implements OnInit {
     });
   }
 
-  onTaskSubmit(){
-    if (this.taskForm.valid){
-      const taskFormValue = this.taskForm.getRawValue();
-      const task: Task = {
-        name: taskFormValue.name!,
-        description: taskFormValue.description,
-        project: taskFormValue.project!,
-        date: taskFormValue.date!,
-        isDone: false,
-      }
-
-      this.dialogRef.close({
-        data: task,
-        action: 'Submit'
-      });
-    }
-  }
 }
