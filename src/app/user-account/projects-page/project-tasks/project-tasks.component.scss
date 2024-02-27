@@ -41,6 +41,40 @@
     }
 }
 
+.done{
+  margin-top: 60px;
+
+
+}
+
+.wrapper{
+  display: flex;
+  justify-content: space-between;
+  color: rgb(221, 220, 220);
+  margin: 20px;
+  align-items: center;
+
+  .subtitle{
+    font-size: 24px;
+    font-weight: 500;
+  }
+
+  .button{
+    padding: 5px 10px;
+    border: 1px solid rgb(164, 164, 164);
+    border-radius: 5px;
+    cursor: pointer;
+
+    &:hover{
+      background-color: rgba(164, 164, 164, 0.463);
+    }
+  }
+}
+
+.done-table{
+  opacity: 50%;
+}
+
 .mat-mdc-row .mat-mdc-cell {
   border-bottom: 1px solid transparent;
   border-top: 1px solid transparent;
