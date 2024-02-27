@@ -41,9 +41,15 @@
     }
 }
 
+.empty{
+  text-align: center;
+  margin: 40px;
+  color: rgb(221, 220, 220);
+  font-size: 18px;
+}
+
 .done{
   margin-top: 60px;
-
 
 }
 
@@ -69,6 +75,12 @@
       background-color: rgba(164, 164, 164, 0.463);
     }
   }
+}
+
+.complited{
+  text-align: center;
+  color: rgb(221, 220, 220);
+  margin-top: 15px;
 }
 
 .done-table{
