@@ -93,7 +93,7 @@ export class TaskService {
 
   public getProjectTasks(projectId: number): Task[]{
     return this.tasks.filter(task=>{
-      return task.project = projectId
+      return task.project == projectId
     })
   }
 
