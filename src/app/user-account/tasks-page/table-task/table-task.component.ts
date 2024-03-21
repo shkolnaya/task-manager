@@ -3,6 +3,7 @@ import { AfterViewInit, Component, Input, OnInit, ViewChild } from '@angular/cor
 import { MatSort, Sort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { Task } from '../task/task.interface';
+import * as moment from 'moment';
 
 
 @Component({
@@ -17,6 +18,7 @@ export class TableTaskComponent implements OnInit, AfterViewInit {
 
   displayedColumns: string[] = ['name', 'project', 'date', 'result'];
   dataSource: any;
+
  
   constructor(private _liveAnnouncer: LiveAnnouncer) {}
 
@@ -30,5 +32,8 @@ export class TableTaskComponent implements OnInit, AfterViewInit {
     this.dataSource.sort = this.sort;
   }
 
+  checkExpired(task: Task){
+    return moment().isAfter(task.date, 'day')
+  }
 
 }

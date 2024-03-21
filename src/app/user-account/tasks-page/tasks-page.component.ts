@@ -34,6 +34,8 @@ export class TasksPageComponent implements OnInit{
   tomorrowTasks: Task[] = [];
   weekTasks: Task[] = [];
 
+  allTasks: Task[] = [];
+
   projects: Project[];
 
   ngOnInit(): void {
@@ -52,6 +54,7 @@ export class TasksPageComponent implements OnInit{
     this.tomorrowTasks = this.taskService.getTomorrowTasks();
 
     this.weekTasks = this.taskService.getWeekTasks();
+    this.allTasks = this.taskService.getAllTasks();
   }
 
   drop(event: CdkDragDrop<Task[]>) {

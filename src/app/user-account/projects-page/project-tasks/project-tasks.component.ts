@@ -5,6 +5,8 @@ import { TaskService } from '../../tasks-page/task.service';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatSort } from '@angular/material/sort';
 import { SelectionModel } from '@angular/cdk/collections';
+import { Project } from '../project.interface';
+import { ProjectsService } from '../projects.service';
 
 @Component({
   selector: 'app-project-tasks',
@@ -13,9 +15,13 @@ import { SelectionModel } from '@angular/cdk/collections';
 })
 export class ProjectTasksComponent implements OnInit, AfterViewInit{
   tasks: Task[];
-  projectId: number;
+  project: Project | undefined;
 
-  constructor(private route: ActivatedRoute, private taskService: TaskService) { }
+  constructor(
+    private route: ActivatedRoute, 
+    private taskService: TaskService, 
+    private projectService: ProjectsService
+  ) {}
 
   tasksToDo: Task[];
   tasksDone: Task[];
@@ -29,7 +35,7 @@ export class ProjectTasksComponent implements OnInit, AfterViewInit{
   ngOnInit() {
     this.route.params.subscribe(params=>{
       let id = params['id'];
-      this.projectId = id;
+      this.project = this.projectService.getProjectById(id);
       this.tasks = this.taskService.getProjectTasks(id);
     });
 
@@ -73,21 +79,27 @@ export class ProjectTasksComponent implements OnInit, AfterViewInit{
     /** Whether the number of selected elements matches the total number of rows. */
   isAllToDoSelected() {
     const numSelected = this.toDoSelection.selected.length;
-    const numRows = this.toDoDataSource.data.length;
+    const numRows = this.toDoDataSource.length;
     return numSelected == numRows;
   }
 
   isAllDoneSelected() {
     const numSelected = this.doneSelection.selected.length;
-    const numRows = this.doneDataSource.data.length;
+    const numRows = this.doneDataSource.length;
     return numSelected == numRows;
   }
 
   /** Selects all rows if they are not all selected; otherwise clear selection. */
-  toggleAllRows() {
+  toggleAllToDoRows() {
     this.isAllToDoSelected() ?
         this.toDoSelection.clear() :
         this.toDoDataSource.data.forEach((row: Task) => this.toDoSelection.select(row));
+  }
+
+  toggleAllDoneRows() {
+    this.isAllDoneSelected() ?
+        this.doneSelection.clear() :
+        this.doneDataSource.data.forEach((row: Task) => this.doneSelection.select(row));
   }
 
   completeSelectedTasks(){

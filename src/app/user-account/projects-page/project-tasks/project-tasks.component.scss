@@ -10,11 +10,21 @@
     border-radius: 8px;
     box-sizing: border-box;
 
-    .title{
+    .project{
+      display: flex;
+      align-items: baseline;
+      gap: 10px;
 
+
+      .title{
         font-size: 32px;
         font-weight: 700;
+      }
+
+      
     }
+
+
 
     .buttons{
       display: flex;

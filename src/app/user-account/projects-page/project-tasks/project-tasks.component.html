@@ -1,9 +1,15 @@
 <div class="header">
-    <div class="title">{{projectId | projectName}}</div>
+  <div class="project">
+    <!-- <mat-icon  [fontIcon]="project.icon ?? 'check_circle'"></mat-icon> -->
+    <div class="title">{{project?.name}}</div>
+    <div class="edit">
+      <mat-icon  fontIcon="edit"></mat-icon>
+    </div>
+  </div>
     <div class="buttons">
-        <div class="button">
-            Create a task
-        </div>
+      <div class="button">
+          Create a task
+      </div>
     </div>
 </div>
 
@@ -25,7 +31,7 @@
       <!-- Name Column -->
       <ng-container matColumnDef="select">
         <th mat-header-cell *matHeaderCellDef>
-          <mat-checkbox (change)="$event ? toggleAllRows() : null"
+          <mat-checkbox (change)="$event ? toggleAllToDoRows() : null"
                         [checked]="toDoSelection.hasValue() && isAllToDoSelected()"
                         [indeterminate]="toDoSelection.hasValue() && !isAllToDoSelected()">
           </mat-checkbox>
@@ -86,7 +92,7 @@
       <!-- Name Column -->
       <ng-container matColumnDef="select">
         <th mat-header-cell *matHeaderCellDef>
-          <mat-checkbox (change)="$event ? toggleAllRows() : null"
+          <mat-checkbox (change)="$event ? toggleAllDoneRows() : null"
                         [checked]="doneSelection.hasValue() && isAllDoneSelected()"
                         [indeterminate]="doneSelection.hasValue() && !isAllDoneSelected()">
           </mat-checkbox>

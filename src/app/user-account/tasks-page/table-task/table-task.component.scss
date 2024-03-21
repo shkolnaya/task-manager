@@ -1,0 +1,23 @@
+.expired{
+    &::after{
+        content: '.';
+        position: absolute;
+        color: transparent;
+        background-color: #ff000081;
+        box-shadow: 0 0 1px 1px #ff00006a;
+        border-radius: 50px;
+        width: 10px;
+        height: 10px;
+        margin-left: 10px;
+        animation: pulse-animation 2s infinite;
+    }
+}
+
+@keyframes pulse-animation {
+    0% {
+      box-shadow: 0 0 0 0px #ff000069;
+    }
+    100% {
+      box-shadow: 0 0 0 10px #ff000000;
+    }
+}

@@ -38,14 +38,21 @@ export class CalendarTaskComponent implements OnInit{
   fillDates(){
     let firstDay = moment().month(this.currentMonthIndex).date(1);
     let lastDay =  moment().endOf('month');
-    let daysBefore = firstDay.day() - 7;
+    let daysBefore = firstDay.day();
     let daysAfter = 7 - lastDay.day();
-    lastDay.add(daysAfter, 'd');
-    let day = firstDay.add(daysBefore, 'd');
-    while (day <= lastDay){
-      this.dates.push(moment(day.toDate()));
-      day.add(1, 'd')
+
+    if(lastDay.day() != 0){
+      lastDay.add(daysAfter, 'd');
     }
+    let day = firstDay;
+    if(firstDay.day() != 1){
+      day = firstDay.add(-daysBefore + 1, 'd');
+    }
+      while (day <= lastDay){
+        this.dates.push(moment(day.toDate()));
+        day.add(1, 'd')
+      }
+
   }
 
   ngOnInit(): void {
