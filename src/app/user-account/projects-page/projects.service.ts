@@ -39,8 +39,8 @@ export class ProjectsService {
     return this.projects.find(project => project.id == id)?.name
   }
 
-  getProjectById(id: number){
-    return this.projects.find(project => project.id == id)
+  getProjectById(id: number): Project{
+    return this.projects.find(project => project.id == id) as Project
   }
 
   getNextId(): number{

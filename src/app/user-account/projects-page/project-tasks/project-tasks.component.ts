@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { Task } from '../../tasks-page/task/task.interface';
 import { ActivatedRoute } from '@angular/router';
 import { TaskService } from '../../tasks-page/task.service';
@@ -7,6 +7,9 @@ import { MatSort } from '@angular/material/sort';
 import { SelectionModel } from '@angular/cdk/collections';
 import { Project } from '../project.interface';
 import { ProjectsService } from '../projects.service';
+import { MatDialog } from '@angular/material/dialog';
+import { TaskFormComponent } from '../../tasks-page/task-form/task-form.component';
+import { DialogResult } from '../../tasks-page/dialog-result';
 
 @Component({
   selector: 'app-project-tasks',
@@ -15,11 +18,14 @@ import { ProjectsService } from '../projects.service';
 })
 export class ProjectTasksComponent implements OnInit, AfterViewInit{
   tasks: Task[];
-  project: Project | undefined;
+  project: Project;
+
+  projects: Project[];
 
   constructor(
     private route: ActivatedRoute, 
     private taskService: TaskService, 
+    public dialog: MatDialog,
     private projectService: ProjectsService
   ) {}
 
@@ -32,6 +38,13 @@ export class ProjectTasksComponent implements OnInit, AfterViewInit{
   toDoSelection: SelectionModel<Task>;
   doneSelection: SelectionModel<Task>;
 
+  titleInputVisible: boolean = false;
+
+  @ViewChild('input')
+  input: ElementRef;
+
+
+
   ngOnInit() {
     this.route.params.subscribe(params=>{
       let id = params['id'];
@@ -40,6 +53,11 @@ export class ProjectTasksComponent implements OnInit, AfterViewInit{
     });
 
     this.processData();
+
+    this.projects = this.projectService.getProjects();
+    // this.projects = this.projects.filter(function(el){
+    //   return el.id !== this.project.id
+    // })
 
     this.toDoDataSource = new MatTableDataSource(this.tasksToDo);
     this.doneDataSource = new MatTableDataSource(this.tasksDone);
@@ -117,4 +135,56 @@ export class ProjectTasksComponent implements OnInit, AfterViewInit{
     this.processData();
     this.doneSelection.clear();
   }
+
+  transferToDoTasks(projectId: number){
+    this.toDoSelection.selected.forEach(task  => {
+      task.project = projectId;
+    });
+    this.tasks = this.taskService.getProjectTasks((this.project as Project).id);
+    this.processData();
+    this.toDoSelection.clear();
+  }
+
+  openTitleInput() {
+    this.titleInputVisible = true;
+    this.input.nativeElement.focus();
+  }
+
+  createTask(): void {
+    const newTask = {
+
+    } as Task;
+    this.openEditTaskDialog(newTask);
+  }
+
+  editTask(editTask: Task): void {
+    const task = {...editTask};
+
+    this.openEditTaskDialog(task);
+  }
+
+  openEditTaskDialog(currentTask: Task): void {
+    const dialogRef = this.dialog.open<TaskFormComponent, any, DialogResult<Task>>(TaskFormComponent, {
+      width: '500px',
+      data: {
+        task: currentTask,
+        projects: [this.project],
+      }
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      switch(result?.action) {
+        case 'Submit':
+          if (result.data) {
+            this.taskService.createTask(result.data);
+            this.tasks = this.taskService.getProjectTasks((this.project as Project).id);
+            this.processData();
+          }           
+          break;
+        default:
+          break;
+      }
+    });
+  }
+
 }

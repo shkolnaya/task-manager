@@ -15,20 +15,43 @@
       align-items: baseline;
       gap: 10px;
 
+      &:hover{
+        .edit, .delete{
+          visibility: inherit;
+        }
+      }
+
 
       .title{
         font-size: 32px;
         font-weight: 700;
       }
 
+      .edit, .delete{
+        visibility: hidden;
+      }
+
       
     }
 
-
+    .editing{
+      input{
+        background-color: transparent;
+        font-size: 32px;
+        font-weight: 700;
+        // border: 1px solid #ffffff85;
+        color: rgb(221, 220, 220);
+        border: none;
+        outline: none;
+        font-family: Roboto, "Helvetica Neue", sans-serif;
+      }
+    }
 
     .buttons{
       display: flex;
       gap: 5px;
+      align-items: center;
+      justify-content: center;
     }
 
     .button {
@@ -70,15 +93,25 @@
   margin: 20px;
   align-items: center;
 
+
+
   .subtitle{
     font-size: 24px;
     font-weight: 500;
+  }
+
+  .nav{
+    display: flex;
+    gap: 10px;
+
   }
 
   .button{
     padding: 5px 10px;
     border: 1px solid rgb(164, 164, 164);
     border-radius: 5px;
+    display: flex;
+    align-items: center;
     cursor: pointer;
 
     &:hover{

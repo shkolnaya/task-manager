@@ -1,16 +1,31 @@
 <div class="header">
-  <div class="project">
+  <div class="project" *ngIf="!titleInputVisible">
     <!-- <mat-icon  [fontIcon]="project.icon ?? 'check_circle'"></mat-icon> -->
-    <div class="title">{{project?.name}}</div>
-    <div class="edit">
-      <mat-icon  fontIcon="edit"></mat-icon>
+    <div class="title">{{project.name}}</div>
+    <div class="edit" (click)="openTitleInput()">
+      <mat-icon fontIcon="edit"></mat-icon>
     </div>
+    <!-- <div class="delete">
+      <mat-icon fontIcon="delete"></mat-icon>
+    </div> -->
+
+    
   </div>
-    <div class="buttons">
-      <div class="button">
-          Create a task
-      </div>
+  <div class="editing" *ngIf="titleInputVisible">
+    <input 
+      [(ngModel)]="project.name" 
+      (blur)="titleInputVisible = false"
+      autofocus
+      #input
+    >
+  </div>
+
+  <div class="buttons">
+    <div class="button" (click)="createTask()">
+        Create a task
     </div>
+
+  </div>
 </div>
 
 <div class="empty" *ngIf="!tasks.length; else content">
@@ -23,6 +38,10 @@
       <div class="subtitle">Upcoming tasks</div>
       <div class="nav" *ngIf="this.toDoSelection.selected.length">
         <div class="button" (click)="completeSelectedTasks()">Complete</div>
+        <button mat-button [matMenuTriggerFor]="menu">Transfer to...</button>
+        <mat-menu #menu="matMenu" xPosition="before">
+          <button mat-menu-item *ngFor="let project of projects" (click)="transferToDoTasks(project.id)">{{project.name}}</button>
+        </mat-menu>
       </div>
     </div>
   
@@ -70,7 +89,7 @@
   
   
       <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns; let element" (click)="editTask(element)"></tr>
     </table>
 
     <ng-template #complited>

@@ -33,6 +33,7 @@ import { ProjectNamePipe } from './project-name.pipe';
 import { PickIconComponent } from './projects-page/pick-icon/pick-icon.component';
 import { ProjectFormComponent } from './projects-page/project-form/project-form.component';
 import {MatCheckboxModule} from '@angular/material/checkbox';
+import {MatMenuModule} from '@angular/material/menu';
 
 const dateFormat = 'MMM D, YYYY'
 
@@ -85,7 +86,8 @@ const dateFormats: MatDateFormats = {
     MatSelectModule,
     MatTableModule,
     MatSortModule,
-    MatCheckboxModule
+    MatCheckboxModule,
+    MatMenuModule
   ],
   providers: [
     {provide: DateAdapter, useClass: MomentDateAdapter, deps: [MAT_DATE_LOCALE]},
