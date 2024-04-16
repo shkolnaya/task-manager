@@ -39,7 +39,11 @@ export class TasksPageComponent implements OnInit{
   projects: Project[];
 
   ngOnInit(): void {
-    this.projects = this.projectService.getProjects()
+    this.projectService.getProjects().subscribe(
+      (res)=> {
+        this.projects = res.records
+      }
+    );
 
     this.processData()
 

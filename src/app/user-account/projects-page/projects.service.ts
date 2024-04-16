@@ -1,12 +1,16 @@
 import { Injectable } from '@angular/core';
 import { Project } from './project.interface';
+import { BaseService } from 'src/core/base-service.service';
+import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
+import { GetResult } from 'src/core/interfaces/get-result.interface';
 
-@Injectable({
-  providedIn: 'root'
-})
-export class ProjectsService {
+@Injectable()
+export class ProjectsService extends BaseService{
 
-  constructor() { }
+  constructor( httpClient: HttpClient) {
+    super (httpClient)
+   }
 
   projects: Project[] = [
     {
@@ -27,8 +31,8 @@ export class ProjectsService {
 
   ]
 
-  public getProjects(){
-    return this.projects;
+  getProjects(): Observable<GetResult<Project>>{
+    return this.getRecords<Project>('api/Projects');
   }
 
   public getProjectsNames(){

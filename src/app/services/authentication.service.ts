@@ -12,7 +12,7 @@ import { User } from 'src/core/interfaces/user.interface';
 })
 export class AuthenticationService extends BaseService{
 
-  private readonly localStorageKey = 'userInfo';
+  private readonly localStorageKey = 'taskUserInfo';
   
   private currentUserSubject = new BehaviorSubject<User | null>(null);
   public $currentUser: Observable<User | null>;
@@ -21,7 +21,7 @@ export class AuthenticationService extends BaseService{
     super(httpClient);
     this.$currentUser = this.currentUserSubject.asObservable();
     
-    const userDataJson = localStorage.getItem('userInfo');
+    const userDataJson = localStorage.getItem('taskUserInfo');
 
     if (userDataJson != null) {
       this.currentUserSubject.next(JSON.parse(userDataJson))

@@ -34,6 +34,9 @@ import { PickIconComponent } from './projects-page/pick-icon/pick-icon.component
 import { ProjectFormComponent } from './projects-page/project-form/project-form.component';
 import {MatCheckboxModule} from '@angular/material/checkbox';
 import {MatMenuModule} from '@angular/material/menu';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
+import { JwtInterceptor } from './jwt.interceptor';
+import { ProjectsService } from './projects-page/projects.service';
 
 const dateFormat = 'MMM D, YYYY'
 
@@ -87,11 +90,25 @@ const dateFormats: MatDateFormats = {
     MatTableModule,
     MatSortModule,
     MatCheckboxModule,
-    MatMenuModule
+    MatMenuModule,
+    HttpClientModule
   ],
   providers: [
-    {provide: DateAdapter, useClass: MomentDateAdapter, deps: [MAT_DATE_LOCALE]},
-    {provide: MAT_DATE_FORMATS, useValue: dateFormats},
+    ProjectsService,
+    {
+      provide: DateAdapter, 
+      useClass: MomentDateAdapter, 
+      deps: [MAT_DATE_LOCALE]
+    },
+    {
+      provide: MAT_DATE_FORMATS, 
+      useValue: dateFormats
+    },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: JwtInterceptor,
+      multi: true
+    }
   ]
 })
 export class UserAccountModule { }

@@ -22,7 +22,11 @@ export class ProjectsPageComponent implements OnInit{
   }
 
   processData(){
-    this.projects = this.projectService.getProjects();
+    this.projectService.getProjects().subscribe(
+      (res)=> {
+        this.projects = res.records
+      }
+    );
   }
 
   changeIcon(): void {
