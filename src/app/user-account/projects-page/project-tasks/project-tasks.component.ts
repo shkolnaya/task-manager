@@ -55,9 +55,9 @@ export class ProjectTasksComponent implements OnInit, AfterViewInit{
     this.processData();
 
     this.projects = this.projectService.getProjects();
-    // this.projects = this.projects.filter(function(el){
-    //   return el.id !== this.project.id
-    // })
+    this.projects = this.projects.filter((el) =>{
+      return el.id !== this.project.id
+    })
 
     this.toDoDataSource = new MatTableDataSource(this.tasksToDo);
     this.doneDataSource = new MatTableDataSource(this.tasksDone);

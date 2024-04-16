@@ -3,7 +3,11 @@
 </div>
 
 <div class="content">
-    <app-project *ngFor="let project of projects" [project]="project"></app-project>
+    <app-project 
+        *ngFor="let project of projects" 
+        [project]="project"
+        (projectToEdit)="editProject(project)"
+    ></app-project>
     <app-add-project-button (click)="createProject()"></app-add-project-button>
 
 </div>

@@ -1,10 +1,12 @@
 :host{
-    display: block;
+    display: flex;
+    flex-direction: column;
+    height: calc(100vh - 140px);
 }
 
 .header{
     display: flex;
-    flex: 1 0 14%;
+    flex: 1 0 5%;
     width: 100%;
 
     .day-name{

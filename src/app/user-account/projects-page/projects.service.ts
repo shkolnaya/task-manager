@@ -51,4 +51,10 @@ export class ProjectsService {
     this.projects.push(project)
   }
 
+  deleteProject(projectId: number){
+    this.projects = this.projects.filter((project) => {
+      return project.id != projectId
+    })
+  }
+
 }

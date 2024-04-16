@@ -114,10 +114,12 @@ export class TasksPageComponent implements OnInit{
     dialogRef.afterClosed().subscribe(result => {
       switch(result?.action) {
         case 'Submit':
-          if (result.data) {
+          if (result.data && result.data.project) {
             this.taskService.createTask(result.data);
             this.processData();
-          }           
+          } else {
+            
+          }     
           break;
         default:
           break;

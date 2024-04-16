@@ -1,4 +1,4 @@
-import { Component, Inject, OnInit } from '@angular/core';
+import { Component, Inject, Input, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { DialogResult } from '../../tasks-page/dialog-result';
@@ -18,6 +18,12 @@ interface ProjectForm {
   styleUrls: ['./project-form.component.scss']
 })
 export class ProjectFormComponent implements OnInit{
+
+  @Input()
+  isNewProject: boolean
+
+  @Input()
+  projectToEdit: Project
 
   constructor(
     private projectService: ProjectsService,
@@ -40,7 +46,10 @@ export class ProjectFormComponent implements OnInit{
     this.projectForm = new FormGroup<ProjectForm>({
       name: new FormControl<string>('', Validators.required),
       icon: new FormControl('emoji_events'),
-    })
+    });
+
+    this.projectForm.patchValue(this.data.project);
+    this.isNewProject = this.data.isNewProject
 
   }
 
@@ -58,6 +67,14 @@ export class ProjectFormComponent implements OnInit{
         action: 'Submit'
       });
     }
+  }
+
+  deleteProject(){
+    this.projectService.deleteProject(this.data.project.id);
+    this.dialogRef.close({
+      data: undefined,
+      action: 'Submit'
+    });
   }
 
   cancel() {

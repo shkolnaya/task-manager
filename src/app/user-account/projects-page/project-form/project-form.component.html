@@ -12,9 +12,26 @@
       </div>
   
     </div>
-    <div mat-dialog-actions>
-      <button mat-button (click)="cancel()">No Thanks</button>
-      <button mat-button type="submit" (click)="submit()" [disabled]="!projectForm.valid" cdkFocusInitial>Ok</button>
+    <div mat-dialog-actions class="actions">
+      <div class="base">
+        <button 
+          mat-button 
+          (click)="cancel()"
+        >No Thanks</button>
+        <button 
+          mat-button 
+          type="submit" 
+          (click)="submit()" 
+          [disabled]="!projectForm.valid" 
+          cdkFocusInitial
+        >Ok</button>
+      </div>
+      <button
+        mat-button
+        *ngIf="!isNewProject"
+        (click)="deleteProject()"
+        class="delete"
+      >Delete project</button>
     </div>
   </form>
   

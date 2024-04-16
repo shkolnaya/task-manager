@@ -1,5 +1,6 @@
 .card{
     border-radius: 10px;
+    position: relative;
     width: 160px;
     height: 160px;
     background-color: #ff00eec4;
@@ -12,6 +13,9 @@
 
     &:hover{
         box-shadow: 0px 0px 10px 3px #ff00ee85; 
+        .edit{
+            visibility: initial;
+        }
     }
 
     .mat-icon{
@@ -27,5 +31,18 @@
         margin-top: 10px;
         color: white;
         font-size: 20px;
+    }
+
+    .edit{
+        position: absolute;
+        top: 5px;
+        right: 5px;
+        visibility: hidden;
+
+        .mat-icon{
+            font-size: 18px;
+            width: 30px;
+            height: 30px;
+        }
     }
 }

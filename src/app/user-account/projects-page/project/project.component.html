@@ -1,4 +1,7 @@
 <div class="card" [routerLink]="['/user/projects', project.id]">
     <mat-icon  [fontIcon]="project.icon"></mat-icon>
     <div class="name">{{project.name}}</div>
+    <div class="edit" (click)="editProject($event)">
+        <mat-icon fontIcon="edit"></mat-icon>
+    </div>
 </div>

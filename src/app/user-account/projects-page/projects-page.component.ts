@@ -39,22 +39,33 @@ export class ProjectsPageComponent implements OnInit{
 
     } as Project;
 
-    this.openEditTaskDialog();
+    this.openEditTaskDialog(newProject, true);
 
   }
 
-  openEditTaskDialog(): void {
-    const dialogRef = this.dialog.open<ProjectFormComponent, any, DialogResult<Project>>(ProjectFormComponent, {
-      width: '500px',
-    });
+  editProject(project: Project){
+    this.openEditTaskDialog(project, false);
+  }
 
+  openEditTaskDialog(currentProject: Project, isNew: boolean): void {
+    const dialogRef = this.dialog.open<ProjectFormComponent, any, DialogResult<Project | undefined>>(ProjectFormComponent, {
+      width: '500px',
+      data: {
+        project: currentProject,
+        isNewProject: isNew
+      }
+    });
+ 
     dialogRef.afterClosed().subscribe(result => {
       switch(result?.action) {
         case 'Submit':
-          if (result.data) {
+          if (result.data && result.data.id) {
             this.projectService.createProject(result.data);
-            this.processData();
-          }           
+
+          }   else {
+            // this.projectService.createProject(result.data);
+          }  
+                 
           break;
         default:
           break;

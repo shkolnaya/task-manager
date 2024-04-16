@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { Project } from '../project.interface';
 
 @Component({
@@ -10,5 +10,14 @@ export class ProjectComponent {
 
   @Input()
   project: Project
+
+  @Output()
+  projectToEdit = new EventEmitter<boolean>();
+
+  editProject(event: MouseEvent){
+    this.projectToEdit.emit();
+    event.preventDefault();
+    event.stopPropagation();
+  }
 
 }
