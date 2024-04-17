@@ -24,7 +24,7 @@ export class ProjectsPageComponent implements OnInit{
   processData(){
     this.projectService.getProjects().subscribe(
       (res)=> {
-        this.projects = res.records
+        this.projects = res;
       }
     );
   }
@@ -69,7 +69,7 @@ export class ProjectsPageComponent implements OnInit{
           }   else {
             // this.projectService.createProject(result.data);
           }  
-                 
+          this.processData();       
           break;
         default:
           break;

@@ -1,6 +1,7 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { AuthenticationService } from 'src/app/services/authentication.service';
 import { LoginRequest } from 'src/core/interfaces/login-request.interface';
 
@@ -14,7 +15,7 @@ export class LoginComponent implements OnInit {
   hide = true;
   loginForm: FormGroup;
 
-  constructor( private authService: AuthenticationService ) { }
+  constructor( private authService: AuthenticationService, private router: Router ) { }
 
   ngOnInit(): void {
     this.loginForm = new FormGroup({
@@ -35,7 +36,7 @@ export class LoginComponent implements OnInit {
       }
       this.authService.loginUser(requestBody).subscribe(
         {
-          next: () => {},
+          next: () => {this.router.navigate(["user"])},
           error: (err) => console.log(err)
         }
       )

@@ -4,14 +4,15 @@ import { ContainerComponent } from './user-account/container/container.component
 import { HomePageComponent } from './home-page/home-page.component';
 
 const routes: Routes = [
-  {
-    path: "",
-    component: HomePageComponent
-  },
   { 
     path: "user",
     loadChildren: () => import('./user-account/user-account.module').then(m => m.UserAccountModule)
   },
+  {
+    path: "",
+    component: HomePageComponent
+  },
+
 ];
 
 @NgModule({

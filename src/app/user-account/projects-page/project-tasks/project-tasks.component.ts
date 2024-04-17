@@ -56,7 +56,7 @@ export class ProjectTasksComponent implements OnInit, AfterViewInit{
 
     this.projectService.getProjects().subscribe(
       (res)=> {
-        this.projects = res.records
+        this.projects = res;
       }
     );
     this.projects = this.projects.filter((el) =>{

@@ -14,8 +14,8 @@ export class BaseService {
         return this.httpClient.get<T>(`${this.apiUrl}/${url}`);
     }
 
-    protected getRecords<T>(url: string): Observable<GetResult<T>> {
-        return this.httpClient.get<GetResult<T>>(`${this.apiUrl}/${url}`);
+    protected getRecords<T>(url: string, body: any): Observable<T> {
+        return this.httpClient.post<T>(`${this.apiUrl}/${url}`, body);
     }
 
     protected post<T>(url:string, body: any):Observable<T> {

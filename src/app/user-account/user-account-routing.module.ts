@@ -6,12 +6,14 @@ import { TasksPageComponent } from './tasks-page/tasks-page.component';
 import { SettingsPageComponent } from './settings-page/settings-page.component';
 import { ProjectsPageComponent } from './projects-page/projects-page.component';
 import { ProjectTasksComponent } from './projects-page/project-tasks/project-tasks.component';
+import { UserAccountGuard } from './user-account.guard';
 
 
 const routes: Routes = [
     {
         path: '', 
         component: ContainerComponent,
+        canActivate: [UserAccountGuard],
         children: [
             {
                 path: '',

@@ -31,8 +31,8 @@ export class ProjectsService extends BaseService{
 
   ]
 
-  getProjects(): Observable<GetResult<Project>>{
-    return this.getRecords<Project>('api/Projects');
+  getProjects(): Observable<Project[]>{
+    return this.getRecords<Project[]>('api/Projects/search', '');
   }
 
   public getProjectsNames(){
@@ -51,8 +51,8 @@ export class ProjectsService extends BaseService{
     return this.projects.length + 1;
   }
 
-  createProject(project: Project){
-    this.projects.push(project)
+  createProject(project: Project): Observable<string> {
+    return this.post<string>('api/Projects', project)
   }
 
   deleteProject(projectId: number){
