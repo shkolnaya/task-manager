@@ -56,23 +56,28 @@ export class ProjectsPageComponent implements OnInit{
       width: '500px',
       data: {
         project: currentProject,
-        isNewProject: isNew
+        isNew: isNew
       }
     });
  
     dialogRef.afterClosed().subscribe(result => {
       switch(result?.action) {
         case 'Submit':
-          if (result.data && result.isNewProject) {
-            this.projectService.createProject(result.data).subscribe();
+          if (result.data && result.isNew) {
+            this.projectService.createProject(result.data).subscribe(
+              result => {
+                  this.processData();
+              }
+            )
+          }
 
-          }   
-          if (result.data && !result.isNewProject) {
-            this.projectService.updateProject(result.data).subscribe();
-          }  
-
-          this.processData(); 
-   
+          if (result.data && !result.isNew) {
+            this.projectService.updateProject(result.data).subscribe(
+              result => {
+                this.processData();
+              }
+            );
+          }    
           break;
         default:
           

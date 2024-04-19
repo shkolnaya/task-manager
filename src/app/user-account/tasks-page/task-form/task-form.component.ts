@@ -24,6 +24,9 @@ interface TaskForm {
 export class TaskFormComponent implements OnInit {
 
   @Input()
+  isNew: boolean
+
+  @Input()
   taskToEdit: Task
 
   constructor(
@@ -59,13 +62,14 @@ export class TaskFormComponent implements OnInit {
 
     this.taskForm.patchValue(this.data.task);
     this.projects = this.data.projects;
+    this.isNew = this.data.isNew;
   }
 
   submit() {
     if (this.taskForm.valid){
       const taskFormValue = this.taskForm.getRawValue();
       const task: Task = {
-        id: 0,
+        id: this.data.task.id ?? 0,
         name: taskFormValue.name!,
         description: taskFormValue.description,
         projectId: taskFormValue.project!,
@@ -75,7 +79,8 @@ export class TaskFormComponent implements OnInit {
 
       this.dialogRef.close({
         data: task,
-        action: 'Submit'
+        action: 'Submit',
+        isNew: this.isNew
       });
     }
   }

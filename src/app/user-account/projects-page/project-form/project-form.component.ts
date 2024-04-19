@@ -20,7 +20,7 @@ interface ProjectForm {
 export class ProjectFormComponent implements OnInit{
 
   @Input()
-  isNewProject: boolean
+  isNew: boolean
 
   @Input()
   projectToEdit: Project
@@ -49,15 +49,15 @@ export class ProjectFormComponent implements OnInit{
     });
 
     this.projectForm.patchValue(this.data.project);
-    this.isNewProject = this.data.isNewProject
+    this.isNew = this.data.isNew
 
   }
 
   submit() {
-    if (this.projectForm.valid && this.isNewProject){
+    if (this.projectForm.valid){
       const projectFormValue = this.projectForm.getRawValue();
       const project: Project = {
-        id: 0,
+        id: this.data.project.id ?? 0,
         name: projectFormValue.name!,
         icon: projectFormValue.icon!,
       }
@@ -65,22 +65,7 @@ export class ProjectFormComponent implements OnInit{
       this.dialogRef.close({
         data: project,
         action: 'Submit',
-        isNewProject: this.isNewProject
-      });
-    }
-
-    if (this.projectForm.valid && !this.isNewProject){
-      const projectFormValue = this.projectForm.getRawValue();
-      const project: Project = {
-        id: this.data.project.id,
-        name: projectFormValue.name!,
-        icon: projectFormValue.icon!,
-      }
-
-      this.dialogRef.close({
-        data: project,
-        action: 'Submit',
-        isNewProject: this.isNewProject
+        isNew: this.isNew
       });
     }
   }

@@ -128,8 +128,8 @@ export class TaskService extends BaseService {
     });
   }
 
-  createTask(task: Task){
-    this.tasks.push(task)
+  createTask(task: Task): Observable<string> {
+    return this.post<string>('api/Tasks', task)
   }
 
   updateTask(task: Task): Observable<Task> {

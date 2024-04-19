@@ -191,36 +191,51 @@ export class ProjectTasksComponent implements OnInit, AfterViewChecked {
     const newTask = {
 
     } as Task;
-    this.openEditTaskDialog(newTask);
+    this.openEditTaskDialog(newTask, true);
   }
 
   editTask(editTask: Task): void {
     const task = {...editTask};
 
-    this.openEditTaskDialog(task);
+    this.openEditTaskDialog(task, false);
   }
 
-  openEditTaskDialog(currentTask: Task): void {
+  openEditTaskDialog(currentTask: Task, isNew: boolean): void {
     const dialogRef = this.dialog.open<TaskFormComponent, any, DialogResult<Task>>(TaskFormComponent, {
       width: '500px',
       data: {
         task: currentTask,
         projects: [this.project],
+        isNew: isNew,
       }
     });
 
     dialogRef.afterClosed().subscribe(result => {
       switch(result?.action) {
         case 'Submit':
-          if (result.data) {
-            this.taskService.createTask(result.data);
-            this.taskService.getProjectTasks(this.project.id).subscribe(
-              (res) => {
-                this.tasks = res;
+          if (result.data&& result.isNew) {
+            this.taskService.createTask(result.data).subscribe(
+              result => {
+                this.taskService.getProjectTasks(this.projectId).subscribe(tasks => {
+                  this.tasks = tasks;
+                  this.processData();
+                })
               }
             );
-            this.processData();
-          }           
+          }  
+          if (result.data && !result.isNew) {
+            this.taskService.updateTask(result.data).subscribe(
+              result => {
+                this.taskService.getProjectTasks(this.projectId).subscribe(tasks => {
+                  this.tasks = tasks;
+                  this.processData();
+                })
+              }
+            );
+          }    
+            
+          this.processData(); 
+
           break;
         default:
           break;
