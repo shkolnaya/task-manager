@@ -65,9 +65,10 @@ export class TaskFormComponent implements OnInit {
     if (this.taskForm.valid){
       const taskFormValue = this.taskForm.getRawValue();
       const task: Task = {
+        id: 0,
         name: taskFormValue.name!,
         description: taskFormValue.description,
-        project: taskFormValue.project!,
+        projectId: taskFormValue.project!,
         date: taskFormValue.date!,
         isDone: false,
       }

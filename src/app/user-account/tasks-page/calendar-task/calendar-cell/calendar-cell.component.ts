@@ -41,8 +41,11 @@ export class CalendarCellComponent implements OnInit{
         event.previousIndex,
         event.currentIndex,
       );
-
+      
+    
       event.container.data[event.currentIndex].date = this.date;
+      this.taskService.updateTask(event.container.data[event.currentIndex])
+        .subscribe()
 
       
     }
@@ -66,7 +69,7 @@ export class CalendarCellComponent implements OnInit{
       switch(result?.action) {
         case 'Submit':
           if (result.data) {
-            this.taskService.createTask(result.data);
+            this.taskService.updateTask(result.data);
           }           
           break;
         default:

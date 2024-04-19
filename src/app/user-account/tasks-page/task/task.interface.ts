@@ -1,9 +1,10 @@
 import { Moment } from "moment";
 
 export interface Task {
+    id: number,
     name: string;
     description: string | null;
-    project: number;
+    projectId: number;
     date: Moment;
     isDone: boolean;
 }

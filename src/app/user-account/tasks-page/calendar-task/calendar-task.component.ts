@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import * as moment from 'moment';
 import { TaskService } from '../task.service';
 import { Task } from '../task/task.interface';
+import { TaskFilter } from 'src/core/interfaces/task-filter.interface';
 
 @Component({
   selector: 'app-calendar-task',
@@ -12,6 +13,13 @@ import { Task } from '../task/task.interface';
 
 
 export class CalendarTaskComponent implements OnInit{
+
+  filter: TaskFilter = 
+    {
+      filterName: 'isDone',
+      filterValue: 'false'
+    }
+  
 
   constructor(private taskService: TaskService){}
 
@@ -58,7 +66,11 @@ export class CalendarTaskComponent implements OnInit{
   ngOnInit(): void {
     this.fillDates();
 
-    this.tasks = this.taskService.getAllTasks();
+    this.taskService.getFilteredTasks([this.filter]).subscribe(
+      (res)=> {
+        this.tasks = res;
+      }
+    );
   }
   
 

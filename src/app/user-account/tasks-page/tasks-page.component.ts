@@ -58,7 +58,11 @@ export class TasksPageComponent implements OnInit{
     this.tomorrowTasks = this.taskService.getTomorrowTasks();
 
     this.weekTasks = this.taskService.getWeekTasks();
-    this.allTasks = this.taskService.getAllTasks();
+    this.taskService.getAllTasks().subscribe(
+      (res)=> {
+        this.allTasks = res;
+      }
+    );
   }
 
   drop(event: CdkDragDrop<Task[]>) {
@@ -118,7 +122,7 @@ export class TasksPageComponent implements OnInit{
     dialogRef.afterClosed().subscribe(result => {
       switch(result?.action) {
         case 'Submit':
-          if (result.data && result.data.project) {
+          if (result.data && result.data.projectId) {
             this.taskService.createTask(result.data);
             this.processData();
           } else {

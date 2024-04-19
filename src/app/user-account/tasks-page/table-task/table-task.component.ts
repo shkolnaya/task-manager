@@ -4,6 +4,8 @@ import { MatSort, Sort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { Task } from '../task/task.interface';
 import * as moment from 'moment';
+import { TaskService } from '../task.service';
+import { TaskFilter } from 'src/core/interfaces/task-filter.interface';
 
 
 @Component({
@@ -13,17 +15,29 @@ import * as moment from 'moment';
 })
 export class TableTaskComponent implements OnInit, AfterViewInit {
 
-  @Input()
+  
   tasks: Task[];
 
   displayedColumns: string[] = ['name', 'project', 'date', 'result'];
   dataSource: any;
 
+  filter: TaskFilter = {
+    filterName: 'isDone',
+    filterValue: 'false'
+  }
+
  
-  constructor(private _liveAnnouncer: LiveAnnouncer) {}
+  constructor(private _liveAnnouncer: LiveAnnouncer, private taskService: TaskService) {}
 
   ngOnInit(): void {
-    this.dataSource = new MatTableDataSource(this.tasks);
+
+    this.taskService.getFilteredTasks([this.filter]).subscribe(
+      (res)=> {
+        this.tasks = res;
+        this.dataSource = new MatTableDataSource(this.tasks);
+      }
+    );
+    
   }
 
   @ViewChild(MatSort) sort: MatSort;

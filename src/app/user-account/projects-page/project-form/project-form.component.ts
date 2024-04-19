@@ -54,23 +54,39 @@ export class ProjectFormComponent implements OnInit{
   }
 
   submit() {
-    if (this.projectForm.valid){
+    if (this.projectForm.valid && this.isNewProject){
       const projectFormValue = this.projectForm.getRawValue();
       const project: Project = {
-        id: this.projectService.getNextId(),
+        id: 0,
         name: projectFormValue.name!,
         icon: projectFormValue.icon!,
       }
 
       this.dialogRef.close({
         data: project,
-        action: 'Submit'
+        action: 'Submit',
+        isNewProject: this.isNewProject
+      });
+    }
+
+    if (this.projectForm.valid && !this.isNewProject){
+      const projectFormValue = this.projectForm.getRawValue();
+      const project: Project = {
+        id: this.data.project.id,
+        name: projectFormValue.name!,
+        icon: projectFormValue.icon!,
+      }
+
+      this.dialogRef.close({
+        data: project,
+        action: 'Submit',
+        isNewProject: this.isNewProject
       });
     }
   }
 
   deleteProject(){
-    this.projectService.deleteProject(this.data.project.id);
+    this.projectService.deleteProject(this.data.project.id).subscribe();
     this.dialogRef.close({
       data: undefined,
       action: 'Submit'

@@ -63,15 +63,19 @@ export class ProjectsPageComponent implements OnInit{
     dialogRef.afterClosed().subscribe(result => {
       switch(result?.action) {
         case 'Submit':
-          if (result.data && result.data.id) {
-            this.projectService.createProject(result.data);
+          if (result.data && result.isNewProject) {
+            this.projectService.createProject(result.data).subscribe();
 
-          }   else {
-            // this.projectService.createProject(result.data);
+          }   
+          if (result.data && !result.isNewProject) {
+            this.projectService.updateProject(result.data).subscribe();
           }  
-          this.processData();       
+
+          this.processData(); 
+   
           break;
         default:
+          
           break;
       }
     });

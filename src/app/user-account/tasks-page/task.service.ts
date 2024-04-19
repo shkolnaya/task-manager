@@ -2,59 +2,67 @@ import { Injectable } from '@angular/core';
 import { Task } from './task/task.interface';
 import * as moment from 'moment';
 import { Observable } from 'rxjs';
+import { BaseService } from 'src/core/base-service.service';
+import { HttpClient } from '@angular/common/http';
+import { TaskFilter } from 'src/core/interfaces/task-filter.interface';
 
-@Injectable({
-  providedIn: 'root'
-})
-export class TaskService {
+@Injectable()
+export class TaskService extends BaseService {
 
   $tasks : Observable<Task[]> = new Observable<Task[]>();
   
 
-  constructor() {
+  constructor( httpClient: HttpClient) {
+    super(httpClient);
     const a = moment();
   } 
 
   tasks = [
       {
+        id: 1,
         name: 'Expired task',
         description: 'Start using this app earlier',
-        project: 1,
+        projectId: 1,
         date: moment('2024-01-01'),
         isDone: false,
       },
       {
+        id: 2,
         name: 'My first task',
         description: 'Create my first task in this app',
-        project: 1,
+        projectId: 1,
         date: moment(),
         isDone: false,
       },
       {
+        id: 3,
         name: 'My second task',
         description: 'Have my first task done',
-        project: 3,
+        projectId: 3,
         date: moment(),
         isDone: false,
       },
       {
+        id: 4,
         name: 'Clean the house',
         description: null,
-        project: 2,
+        projectId: 2,
         date: moment(),
         isDone: false,
       },
       {
+        id: 5,
         name: 'Task for tomorrow',
         description: 'Check if everything was done yesterday',
-        project: 3,
+        projectId: 3,
         date: moment('2024-02-03'),
         isDone: false,
       },
       {
+        id: 6,
         name: 'Vacation',
         description: 'Plan trip to Italy',
-        project: 2,
+        projectId: 2,
         date: moment('2024-02-5'),
         isDone: false,
       }
@@ -65,8 +73,12 @@ export class TaskService {
   tomorrowTasks: Task[]
   weekTasks: Task[]
 
-  public getAllTasks(){
-    return this.tasks
+  public getAllTasks(): Observable<Task[]>{
+    return this.getRecords<Task[]>('api/Tasks/search', {filters: []})
+  };
+
+  public getFilteredTasks(filters: TaskFilter[]): Observable<Task[]>{
+    return this.getRecords<Task[]>('api/Tasks/search', {'filters': filters})
   };
 
   public getExpiredTasks(){
@@ -91,10 +103,15 @@ export class TaskService {
 
   }
 
-  public getProjectTasks(projectId: number): Task[]{
-    return this.tasks.filter(task=>{
-      return task.project == projectId
-    })
+  public getProjectTasks(projectId: number): Observable<Task[]>{
+    return this.getFilteredTasks(
+      [
+        {
+          filterName: 'project',
+          filterValue: projectId
+        }
+      ]
+    )
   }
 
   getNextWeekStart(){
@@ -113,5 +130,9 @@ export class TaskService {
 
   createTask(task: Task){
     this.tasks.push(task)
+  }
+
+  updateTask(task: Task): Observable<Task> {
+    return this.put<Task>(`api/Tasks/${task.id}`, task)
   }
 }

@@ -35,6 +35,7 @@ export class ProjectsService extends BaseService{
     return this.getRecords<Project[]>('api/Projects/search', '');
   }
 
+
   public getProjectsNames(){
     return this.projects.map(a => a.name);
   }
@@ -43,8 +44,8 @@ export class ProjectsService extends BaseService{
     return this.projects.find(project => project.id == id)?.name
   }
 
-  getProjectById(id: number): Project{
-    return this.projects.find(project => project.id == id) as Project
+  getProjectById(id: number): Observable<Project> {
+    return this.get<Project>(`api/Projects/${id}`)
   }
 
   getNextId(): number{
@@ -55,10 +56,12 @@ export class ProjectsService extends BaseService{
     return this.post<string>('api/Projects', project)
   }
 
-  deleteProject(projectId: number){
-    this.projects = this.projects.filter((project) => {
-      return project.id != projectId
-    })
+  updateProject(project: Project): Observable<string> {
+    return this.put<string>(`api/Projects/${project.id}`, project)
+  }
+
+  deleteProject(projectId: number): Observable<string> {
+    return this.delete<string>(`api/Projects/${projectId}`)
   }
 
 }

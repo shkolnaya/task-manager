@@ -37,6 +37,7 @@ import {MatMenuModule} from '@angular/material/menu';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { JwtInterceptor } from './jwt.interceptor';
 import { ProjectsService } from './projects-page/projects.service';
+import { TaskService } from './tasks-page/task.service';
 
 const dateFormat = 'MMM D, YYYY'
 
@@ -95,6 +96,7 @@ const dateFormats: MatDateFormats = {
   ],
   providers: [
     ProjectsService,
+    TaskService,
     {
       provide: DateAdapter, 
       useClass: MomentDateAdapter, 
