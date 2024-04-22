@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import * as moment from 'moment';
 import { Task } from '../../task/task.interface';
 import { CdkDragDrop, moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
@@ -19,6 +19,10 @@ export class CalendarCellComponent implements OnInit{
 
   @Input()
   tasks: Task[]
+
+  @Output()
+  taskToEdit = new EventEmitter<Task>();
+
 
   constructor(public dialog: MatDialog, private taskService: TaskService){}
   isCurrentMonth: boolean;
@@ -51,31 +55,35 @@ export class CalendarCellComponent implements OnInit{
     }
   }
 
-  editTask(editTask: Task): void {
-    const task = {...editTask};
-
-    this.openEditTaskDialog(task);
+  editTask(task: Task): void {
+    this.taskToEdit.emit(task);
   }
   
   
 
-  openEditTaskDialog(currentTask: Task): void {
-    const dialogRef = this.dialog.open<TaskFormComponent, Task, DialogResult<Task>>(TaskFormComponent, {
-      width: '500px',
-      data: currentTask
-    });
+  // openEditTaskDialog(currentTask: Task, isNew: boolean): void {
+  //   const dialogRef = this.dialog.open<TaskFormComponent, any, DialogResult<Task>>(TaskFormComponent, {
+  //     width: '500px',
+  //     data: {
+  //       task: currentTask,
+  //       projects: [],
+  //       isNew: isNew
+  //     }
+  //   });
 
-    dialogRef.afterClosed().subscribe(result => {
-      switch(result?.action) {
-        case 'Submit':
-          if (result.data) {
-            this.taskService.updateTask(result.data);
-          }           
-          break;
-        default:
-          break;
-      }
-    });
-  } 
+  //   dialogRef.afterClosed().subscribe(result => {
+  //     switch(result?.action) {
+  //       case 'Submit':
+  //         if (result.data && !result.isNew) {
+  //           this.taskService.updateTask(result.data).subscribe(res => {
+
+  //           });
+  //         }           
+  //         break;
+  //       default:
+  //         break;
+  //     }
+  //   });
+  // } 
 
 }

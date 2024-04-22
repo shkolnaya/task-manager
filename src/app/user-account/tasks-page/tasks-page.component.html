@@ -73,7 +73,7 @@
     </ng-container>
 
     <ng-container *ngSwitchCase="viewTypes.Calendar">
-        <app-calendar-task></app-calendar-task>
+        <app-calendar-task [projects]="projects"></app-calendar-task>
     </ng-container>
 
     <ng-container *ngSwitchCase="viewTypes.List">

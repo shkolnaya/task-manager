@@ -5,8 +5,14 @@
 </div>
 
 
-<div class="calendar" cdkDropListGroup>
-    <app-calendar-cell class="dates" *ngFor="let date of dates" [date]="date" [tasks]=" tasks | taskFilter: date">
+<div class="calendar" cdkDropListGroup *ngIf="tasks">
+    <app-calendar-cell 
+        class="dates" 
+        *ngFor="let date of dates" 
+        [date]="date" 
+        [tasks]=" tasks | taskFilter: date"
+        (taskToEdit)="editTask($event)"
+    >
         
     </app-calendar-cell>
 </div>
