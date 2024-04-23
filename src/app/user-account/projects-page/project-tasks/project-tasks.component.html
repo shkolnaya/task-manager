@@ -15,7 +15,7 @@
     <div class="editing" *ngIf="titleInputVisible">
       <input 
         [(ngModel)]="project.name" 
-        (blur)="titleInputVisible = false"
+        (blur)="updateProjectName()"
         autofocus
         #input
       >

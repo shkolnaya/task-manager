@@ -97,6 +97,10 @@ export class ProjectTasksComponent implements OnInit, AfterViewChecked {
     this.doneSelection = new SelectionModel<Task>(this.allowMultiSelect, this.initialSelection);
   }
 
+  updateProjectName(){
+    this.projectService.updateProject(this.project).subscribe();
+  }
+
   @ViewChild(MatSort) 
   sort: MatSort;
 
