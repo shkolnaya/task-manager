@@ -9,6 +9,8 @@ import { TaskFormComponent } from './task-form/task-form.component';
 import { DialogResult } from './dialog-result';
 import { ProjectsService } from '../projects-page/projects.service';
 import { Project } from '../projects-page/project.interface';
+import { TaskFilter } from 'src/core/interfaces/task-filter.interface';
+import { NumberFormatStyle } from '@angular/common';
 
 enum ViewType {
   Grid,
@@ -34,6 +36,13 @@ export class TasksPageComponent implements OnInit{
   tomorrowTasks: Task[] = [];
   weekTasks: Task[] = [];
 
+  filters: TaskFilter[] = [
+    {
+      filterName: 'isDone',
+      filterValue: false
+    }
+  ];
+
   allTasks: Task[] = [];
 
   projects: Project[];
@@ -52,18 +61,46 @@ export class TasksPageComponent implements OnInit{
   }
 
   processData(){
-    this.expiredTasks = this.taskService.getExpiredTasks(); 
-    this.todayTasks = this.taskService.getTodayTasks();
-
-    this.tomorrowTasks = this.taskService.getTomorrowTasks();
-
-    this.weekTasks = this.taskService.getWeekTasks();
-    this.taskService.getAllTasks().subscribe(
+    this.taskService.getFilteredTasks(this.filters).subscribe(
       (res)=> {
         this.allTasks = res;
+        this.filterTasks(this.allTasks);
       }
     );
   }
+
+  filterTasks(tasks: Task[]){
+    this.expiredTasks = [];
+    this.todayTasks = [];
+    this.tomorrowTasks = [];
+    this.weekTasks = [];
+
+    let today = moment();
+    let tomorrow = moment().add(1, 'day');
+    let weekStart = this.getNextWeekStart()
+    let weekEnd = moment(weekStart).add(7, 'day')
+    for (let task of tasks) {
+      task.date = moment(task.date);
+      if (today.isAfter(task.date, 'day')){
+        this.expiredTasks.push(task);
+      }
+      if (today.isSame(task.date, 'day')){
+        this.todayTasks.push(task);
+      }
+      if(tomorrow.isSame(task.date, 'day')){
+        this.tomorrowTasks.push(task);
+      }
+      if (task.date.isBetween(weekStart, weekEnd, 'day', '[]')){
+        this.weekTasks.push(task);
+      }
+    }
+  }
+
+  getNextWeekStart(){
+    let todayIndex = moment().isoWeekday();
+    return moment().add((8-todayIndex), 'day');
+  }
+
 
   drop(event: CdkDragDrop<Task[]>) {
     if (event.previousContainer === event.container) {
@@ -77,19 +114,20 @@ export class TasksPageComponent implements OnInit{
         event.currentIndex,
       );
 
-      if (event.container.id == 'cdk-drop-list-1'){
+      if (event.container.id == 'expired'){
         event.container.data[event.currentIndex].date = moment();
       } 
-      if(event.container.id == 'cdk-drop-list-0'){
+      if(event.container.id == 'today'){
         event.container.data[event.currentIndex].date = moment().add(-1, 'day');
       }
-      if(event.container.id == 'cdk-drop-list-2'){
+      if(event.container.id == 'tomorrow'){
         event.container.data[event.currentIndex].date = moment().add(1, 'day');
       }
-      if(event.container.id == 'cdk-drop-list-3'){
-        event.container.data[event.currentIndex].date = this.taskService.getNextWeekStart();
+      if(event.container.id == 'week'){
+        event.container.data[event.currentIndex].date = this.getNextWeekStart();
       }
-      
+      this.taskService.updateTask(event.container.data[event.currentIndex]).subscribe();
+      console.log('ffff')
     }
   }
 
@@ -98,36 +136,45 @@ export class TasksPageComponent implements OnInit{
 
     } as Task;
 
-    this.openEditTaskDialog(newTask);
+    this.openEditTaskDialog(newTask, true);
 
   }
 
   editTask(editTask: Task): void {
     const task = {...editTask};
 
-    this.openEditTaskDialog(task);
+    this.openEditTaskDialog(task, false);
   }
   
   
 
-  openEditTaskDialog(currentTask: Task): void {
+  openEditTaskDialog(currentTask: Task, isNew: boolean): void {
     const dialogRef = this.dialog.open<TaskFormComponent, any, DialogResult<Task>>(TaskFormComponent, {
       width: '500px',
       data: {
         task: currentTask,
         projects: this.projects,
+        isNew: isNew
       }
     });
 
     dialogRef.afterClosed().subscribe(result => {
       switch(result?.action) {
         case 'Submit':
-          if (result.data && result.data.projectId) {
-            this.taskService.createTask(result.data);
-            this.processData();
-          } else {
-            
-          }     
+          if (result.data && result.isNew) {
+            this.taskService.createTask(result.data).subscribe(
+              res => {
+                this.processData()
+              }
+            );
+          } 
+          if (result.data && !result.isNew){
+            this.taskService.updateTask(result.data).subscribe(
+              res => {
+                this.processData()
+              }
+            );
+          }   
           break;
         default:
           break;

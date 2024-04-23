@@ -41,7 +41,11 @@ export class ProjectsService extends BaseService{
   }
 
   getProjectName(id: number){
-    return this.projects.find(project => project.id == id)?.name
+    let name = '';
+    this.getProjectById(id).subscribe(res => {
+      name = res.name;
+    })
+    return name;
   }
 
   getProjectById(id: number): Observable<Project> {

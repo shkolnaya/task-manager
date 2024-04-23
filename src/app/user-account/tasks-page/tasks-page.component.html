@@ -30,6 +30,7 @@
         <div class="wrapper">
             <div 
             class="day" 
+            id="expired"
             cdkDropList 
             #expiredList="cdkDropList"
             [cdkDropListData]="expiredTasks"
@@ -40,6 +41,7 @@
         </div>
         <div 
             class="day" 
+            id="today"
             cdkDropList 
             #todayList="cdkDropList"
             [cdkDropListData]="todayTasks"
@@ -50,6 +52,7 @@
         </div>
         <div 
             class="day" 
+            id="tomorrow"
             cdkDropList 
             #tomorrowList="cdkDropList"
             [cdkDropListData]="tomorrowTasks"
@@ -60,6 +63,7 @@
         </div>
         <div 
             class="day" 
+            id="week"
             cdkDropList 
             #weekList="cdkDropList"
             [cdkDropListData]="weekTasks"
@@ -77,7 +81,7 @@
     </ng-container>
 
     <ng-container *ngSwitchCase="viewTypes.List">
-        <app-table-task></app-table-task>
+        <app-table-task [projects]="projects"></app-table-task>
     </ng-container>
 
 </div>

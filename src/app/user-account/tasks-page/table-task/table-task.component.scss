@@ -13,6 +13,17 @@
     }
 }
 
+.mat-mdc-row .mat-mdc-cell {
+  border-bottom: 0,5px solid currentColor;
+  border-top: 0,5px solid currentColor;
+  cursor: pointer;
+}
+
+.mat-mdc-row:hover .mat-mdc-cell {
+  border-bottom: 1px solid currentColor;
+  border-top: 1px solid currentColor;
+}
+
 @keyframes pulse-animation {
     0% {
       box-shadow: 0 0 0 0px #ff000069;
