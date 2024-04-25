@@ -45,8 +45,9 @@ export class ExpiredStatisticsComponent implements OnInit{
               '#BB0C75',
               '#d511f4'
             ],
-            hoverOffset: 20,
+            hoverOffset: 25,
             borderColor: 'transparent',
+            borderWidth: 15,
             offset: 10
           }]
         };
@@ -64,7 +65,10 @@ export class ExpiredStatisticsComponent implements OnInit{
       type: 'pie',
       data: this.chartData,
       options: {
-        responsive: true,
+        plugins: {
+          legend:
+          {position: 'right'}
+        }
       }
 
     })
