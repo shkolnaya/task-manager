@@ -38,6 +38,12 @@ import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { JwtInterceptor } from './jwt.interceptor';
 import { ProjectsService } from './projects-page/projects.service';
 import { TaskService } from './tasks-page/task.service';
+import { ProjectsStatisticsComponent } from './dashboard-page/projects-statistics/projects-statistics.component';
+import { StatisticsServiceService } from './dashboard-page/statistics-service.service';
+import { DoneStatisticsComponent } from './dashboard-page/done-statistics/done-statistics.component';
+import { ExpiredStatisticsComponent } from './dashboard-page/expired-statistics/expired-statistics.component';
+
+
 
 const dateFormat = 'MMM D, YYYY'
 
@@ -73,6 +79,9 @@ const dateFormats: MatDateFormats = {
     ProjectNamePipe,
     PickIconComponent,
     ProjectFormComponent,
+    ProjectsStatisticsComponent,
+    DoneStatisticsComponent,
+    ExpiredStatisticsComponent,
   ],
   imports: [
     CommonModule,
@@ -92,11 +101,12 @@ const dateFormats: MatDateFormats = {
     MatSortModule,
     MatCheckboxModule,
     MatMenuModule,
-    HttpClientModule
+    HttpClientModule,
   ],
   providers: [
     ProjectsService,
     TaskService,
+    StatisticsServiceService,
     {
       provide: DateAdapter, 
       useClass: MomentDateAdapter, 

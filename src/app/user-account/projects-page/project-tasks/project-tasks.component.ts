@@ -98,7 +98,11 @@ export class ProjectTasksComponent implements OnInit, AfterViewChecked {
   }
 
   updateProjectName(){
-    this.projectService.updateProject(this.project).subscribe();
+    this.projectService.updateProject(this.project).subscribe(
+      res => {
+        this.titleInputVisible = false;
+      }
+    );
   }
 
   @ViewChild(MatSort) 

@@ -73,6 +73,7 @@ export class TaskFormComponent implements OnInit {
         name: taskFormValue.name!,
         description: taskFormValue.description,
         projectId: taskFormValue.project!,
+        projectName: '',
         date: taskFormValue.date!,
         isDone: false,
       }

@@ -25,7 +25,7 @@ export class TableTaskComponent implements OnInit, AfterViewChecked {
 
   loading: boolean = false;
 
-  displayedColumns: string[] = ['name', 'project', 'date', 'result'];
+  displayedColumns: string[] = ['name', 'projectName', 'date', 'result'];
   dataSource: any;
 
   filters: TaskFilter[] = [

@@ -15,6 +15,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { RegistrationComponent } from './home-page/forms/registration/registration.component';
+import { NgChartsModule } from 'ng2-charts';
 
 
 @NgModule({
@@ -35,7 +36,8 @@ import { RegistrationComponent } from './home-page/forms/registration/registrati
     MatIconModule,
     MatButtonModule,
     ReactiveFormsModule,
-    HttpClientModule
+    HttpClientModule,
+    NgChartsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

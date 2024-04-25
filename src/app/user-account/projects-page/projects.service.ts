@@ -12,33 +12,12 @@ export class ProjectsService extends BaseService{
     super (httpClient)
    }
 
-  projects: Project[] = [
-    {
-      id: 1,
-      name: 'General',
-      icon: 'group'
-    },
-    {
-      id: 2,
-      name: 'Holiday',
-      icon: 'flight'
-    },
-    {
-      id: 3,
-      name: 'Learning',
-      icon: 'school'
-    },
-
-  ]
 
   getProjects(): Observable<Project[]>{
     return this.getRecords<Project[]>('api/Projects/search', '');
   }
 
 
-  public getProjectsNames(){
-    return this.projects.map(a => a.name);
-  }
 
   getProjectName(id: number){
     let name = '';
@@ -52,9 +31,6 @@ export class ProjectsService extends BaseService{
     return this.get<Project>(`api/Projects/${id}`)
   }
 
-  getNextId(): number{
-    return this.projects.length + 1;
-  }
 
   createProject(project: Project): Observable<string> {
     return this.post<string>('api/Projects', project)
