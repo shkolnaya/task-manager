@@ -12,7 +12,7 @@ import { Project } from '../../projects-page/project.interface';
 interface TaskForm {
   name: FormControl<string | null>;
   description: FormControl<string | null>;
-  project: FormControl<number | null>;
+  projectId: FormControl<number | null>;
   date: FormControl<moment.Moment | null>;
 }
 
@@ -56,12 +56,13 @@ export class TaskFormComponent implements OnInit {
     this.taskForm = new FormGroup<TaskForm>({
       name: new FormControl<string>('', Validators.required),
       description: new FormControl(''),
-      project: new FormControl(1),
+      projectId: new FormControl(),
       date: new FormControl(moment())
     });
 
-    this.taskForm.patchValue(this.data.task);
     this.projects = this.data.projects;
+    this.taskForm.patchValue(this.data.task);
+    
     this.isNew = this.data.isNew;
   }
 
@@ -72,7 +73,7 @@ export class TaskFormComponent implements OnInit {
         id: this.data.task.id ?? 0,
         name: taskFormValue.name!,
         description: taskFormValue.description,
-        projectId: taskFormValue.project!,
+        projectId: taskFormValue.projectId!,
         projectName: '',
         deadline: taskFormValue.date!,
         isDone: false,
