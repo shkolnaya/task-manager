@@ -1,0 +1,41 @@
+<div class="header">
+    <div class="title">My tasks</div>
+    <div class="buttons">
+        <div class="button"  (click)="viewType=viewTypes.Calendar">
+            <img src="/assets/icons/calendar (1).png">
+        </div>
+        <div class="button" (click)="viewType=viewTypes.Grid">
+            <img src="/assets/icons/layout.png">
+        </div>
+        <div class="button"  (click)="viewType=viewTypes.List">
+            <img src="/assets/icons/cells.png">
+        </div>
+        <div class="button" (click)="createTask()">
+            Create a task
+        </div>
+    </div>
+
+</div>
+<!-- <div cdkDropList class="tasks" (cdkDropListDropped)="drop($event)">
+    <app-task *ngFor="let task of tasks" [task]="task" cdkDrag></app-task>
+</div> -->
+
+<!-- {{expiredTasks | json}} -->
+
+
+
+<div class="content" [ngSwitch]="viewType">
+
+    <ng-container *ngSwitchCase="viewTypes.Grid"> 
+        <app-column-tasks #columnTasks [projects]="projects"></app-column-tasks>
+    </ng-container>
+
+    <ng-container *ngSwitchCase="viewTypes.Calendar">
+        <app-calendar-task #calendarTasks [projects]="projects"></app-calendar-task>
+    </ng-container>
+
+    <ng-container *ngSwitchCase="viewTypes.List">
+        <app-table-task #tableTasks [projects]="projects"></app-table-task>
+    </ng-container>
+
+</div>

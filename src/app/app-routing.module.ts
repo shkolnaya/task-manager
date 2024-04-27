@@ -1,12 +1,11 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { ContainerComponent } from './user-account/container/container.component';
-import { HomePageComponent } from './home-page/home-page.component';
+import { HomePageComponent } from './components/home-page/home-page.component';
 
 const routes: Routes = [
   { 
     path: "user",
-    loadChildren: () => import('./user-account/user-account.module').then(m => m.UserAccountModule)
+    loadChildren: () => import('./modules/user-account/user-account.module').then(m => m.UserAccountModule)
   },
   {
     path: "",
