@@ -22,7 +22,7 @@ export class TaskComponent implements OnInit{
   }
 
   checkExpired(){
-    if (moment().isAfter(this.task.date, 'day')){
+    if (moment().isAfter(this.task.deadline, 'day')){
       this.isExpired = true;
     }
   }

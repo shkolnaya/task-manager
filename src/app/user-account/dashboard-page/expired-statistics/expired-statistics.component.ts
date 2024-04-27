@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Chart, registerables } from 'node_modules/chart.js'
 import { StatisticsServiceService } from '../statistics-service.service';
-import { ExpiredStatistics } from './expired-statistics';
+import { htmlLegendPlugin } from '../html-legend-functions';
 Chart.register(...registerables);
 
 @Component({
@@ -15,8 +15,6 @@ export class ExpiredStatisticsComponent implements OnInit{
   complitedTasksCount: number;
   upcomigTasksCount: number;
 
-  tasksData: number[]
-
   chartData: any;
 
   constructor(private statService: StatisticsServiceService){
@@ -29,8 +27,8 @@ export class ExpiredStatisticsComponent implements OnInit{
     this.statService.getExpiredStatistics().subscribe(
       res => {
         this.expiredTasksCount = res.expiredTasksCount;
-        this.complitedTasksCount = 0;
-        this.upcomigTasksCount = res.allTasksCount;
+        this.complitedTasksCount = res.completedTasksCount;
+        this.upcomigTasksCount = res.upcomingTasksCount;
 
         this.chartData = {
           labels: [
@@ -47,8 +45,8 @@ export class ExpiredStatisticsComponent implements OnInit{
             ],
             hoverOffset: 25,
             borderColor: 'transparent',
-            borderWidth: 15,
-            offset: 10
+            borderWidth: 20,
+            offset: 0
           }]
         };
 
@@ -66,14 +64,17 @@ export class ExpiredStatisticsComponent implements OnInit{
       data: this.chartData,
       options: {
         plugins: {
-          legend:
-          {position: 'right'}
+          htmlLegend: {
+            containerID: 'legend-container-expired'
+          },
+          legend: {
+            display: false
+          }
         }
-      }
-
-    })
-
-    
+      } as any,
+      plugins: [htmlLegendPlugin]
+    });    
   }
-
 }
+
+

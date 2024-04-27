@@ -19,11 +19,11 @@
   </ng-container>
 
   <!-- Symbol Column -->
-  <ng-container matColumnDef="date">
+  <ng-container matColumnDef="deadline">
     <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by date">
       Deadline
     </th>
-    <td mat-cell *matCellDef="let element" [class.expired]="checkExpired(element)"> {{element.date | momentDate}} </td>
+    <td mat-cell *matCellDef="let element" [class.expired]="checkExpired(element)"> {{element.deadline | momentDate}} </td>
   </ng-container>
 
   <ng-container matColumnDef="result">

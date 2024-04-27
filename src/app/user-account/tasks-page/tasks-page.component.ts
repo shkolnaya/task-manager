@@ -80,17 +80,17 @@ export class TasksPageComponent implements OnInit{
     let weekStart = this.getNextWeekStart()
     let weekEnd = moment(weekStart).add(7, 'day')
     for (let task of tasks) {
-      task.date = moment(task.date);
-      if (today.isAfter(task.date, 'day')){
+      task.deadline = moment(task.deadline);
+      if (today.isAfter(task.deadline, 'day')){
         this.expiredTasks.push(task);
       }
-      if (today.isSame(task.date, 'day')){
+      if (today.isSame(task.deadline, 'day')){
         this.todayTasks.push(task);
       }
-      if(tomorrow.isSame(task.date, 'day')){
+      if(tomorrow.isSame(task.deadline, 'day')){
         this.tomorrowTasks.push(task);
       }
-      if (task.date.isBetween(weekStart, weekEnd, 'day', '[]')){
+      if (task.deadline.isBetween(weekStart, weekEnd, 'day', '[]')){
         this.weekTasks.push(task);
       }
     }
@@ -114,17 +114,17 @@ export class TasksPageComponent implements OnInit{
         event.currentIndex,
       );
 
-      if (event.container.id == 'expired'){
-        event.container.data[event.currentIndex].date = moment();
+      if (event.container.id == 'today'){
+        event.container.data[event.currentIndex].deadline = moment();
       } 
-      if(event.container.id == 'today'){
-        event.container.data[event.currentIndex].date = moment().add(-1, 'day');
+      if(event.container.id == 'expired'){
+        event.container.data[event.currentIndex].deadline = moment().add(-1, 'day');
       }
       if(event.container.id == 'tomorrow'){
-        event.container.data[event.currentIndex].date = moment().add(1, 'day');
+        event.container.data[event.currentIndex].deadline = moment().add(1, 'day');
       }
       if(event.container.id == 'week'){
-        event.container.data[event.currentIndex].date = this.getNextWeekStart();
+        event.container.data[event.currentIndex].deadline = this.getNextWeekStart();
       }
       this.taskService.updateTask(event.container.data[event.currentIndex]).subscribe();
       console.log('ffff')

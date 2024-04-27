@@ -25,7 +25,7 @@ export class TableTaskComponent implements OnInit, AfterViewChecked {
 
   loading: boolean = false;
 
-  displayedColumns: string[] = ['name', 'projectName', 'date', 'result'];
+  displayedColumns: string[] = ['name', 'projectName', 'deadline', 'result'];
   dataSource: any;
 
   filters: TaskFilter[] = [
@@ -56,7 +56,7 @@ export class TableTaskComponent implements OnInit, AfterViewChecked {
       (res)=> {
         this.tasks = res;
         this.tasks.forEach(task => {
-          task.date = moment(task.date)
+          task.deadline = moment(task.deadline)
         });
         this.dataSource = new MatTableDataSource(this.tasks);
       }
@@ -73,7 +73,7 @@ export class TableTaskComponent implements OnInit, AfterViewChecked {
   }
 
   checkExpired(task: Task){
-    return moment().isAfter(task.date, 'day')
+    return moment().isAfter(task.deadline, 'day')
   }
 
   editTask(editTask: Task): void {

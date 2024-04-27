@@ -80,7 +80,7 @@ export class ProjectTasksComponent implements OnInit, AfterViewChecked {
     const tasksDone: Task[] = [];
 
     this.tasks.forEach(task => {
-      task.date = moment(task.date);
+      task.deadline = moment(task.deadline);
       if (task.isDone) {
         tasksDone.push(task);
       } else {

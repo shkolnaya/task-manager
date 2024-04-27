@@ -42,6 +42,7 @@ import { ProjectsStatisticsComponent } from './dashboard-page/projects-statistic
 import { StatisticsServiceService } from './dashboard-page/statistics-service.service';
 import { DoneStatisticsComponent } from './dashboard-page/done-statistics/done-statistics.component';
 import { ExpiredStatisticsComponent } from './dashboard-page/expired-statistics/expired-statistics.component';
+import { CalendarStatisticsComponent } from './dashboard-page/calendar-statistics/calendar-statistics.component';
 
 
 
@@ -82,6 +83,7 @@ const dateFormats: MatDateFormats = {
     ProjectsStatisticsComponent,
     DoneStatisticsComponent,
     ExpiredStatisticsComponent,
+    CalendarStatisticsComponent,
   ],
   imports: [
     CommonModule,

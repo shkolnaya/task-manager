@@ -1,5 +1,6 @@
-export interface ExpiredStatistics {
-    allTasksCount: number,
-    expiredTasksCount: number
+export interface AllTasksStatistics {
+    completedTasksCount: number,
+    expiredTasksCount: number,
+    upcomingTasksCount: number
 }
 

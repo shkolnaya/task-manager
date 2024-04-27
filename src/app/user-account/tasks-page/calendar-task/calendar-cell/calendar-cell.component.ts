@@ -47,7 +47,7 @@ export class CalendarCellComponent implements OnInit{
       );
       
     
-      event.container.data[event.currentIndex].date = this.date;
+      event.container.data[event.currentIndex].deadline = this.date;
       this.taskService.updateTask(event.container.data[event.currentIndex])
         .subscribe()
 

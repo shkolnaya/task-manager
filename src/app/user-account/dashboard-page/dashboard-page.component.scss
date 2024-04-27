@@ -3,10 +3,17 @@
     gap: 5px;
 
 
-    .done, .expired{
-        flex: 1;
+    .done, .expired, .calendar{
         margin-bottom: 13px;
         height: 35vh;
+    }
+
+    .done{
+        flex: 1;
+    }
+
+    .expired, .calendar{
+        flex: 2;
     }
 
 }

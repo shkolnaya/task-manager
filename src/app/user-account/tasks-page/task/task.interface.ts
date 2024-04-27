@@ -6,6 +6,6 @@ export interface Task {
     description: string | null;
     projectId: number;
     projectName: string;
-    date: Moment;
+    deadline: Moment;
     isDone: boolean;
 }
