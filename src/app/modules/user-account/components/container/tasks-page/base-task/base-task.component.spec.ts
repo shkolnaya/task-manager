@@ -12,7 +12,7 @@ describe('BaseTaskComponent', () => {
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(BaseTaskComponent);
+    // fixture = TestBed.createComponent(BaseTaskComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

@@ -11,7 +11,7 @@ interface TaskForm {
   name: FormControl<string | null>;
   description: FormControl<string | null>;
   projectId: FormControl<number | null>;
-  date: FormControl<moment.Moment | null>;
+  deadline: FormControl<moment.Moment | null>;
 }
 
 @Component({
@@ -51,7 +51,7 @@ export class TaskFormComponent implements OnInit {
       name: new FormControl<string>('', Validators.required),
       description: new FormControl(''),
       projectId: new FormControl(),
-      date: new FormControl(moment())
+      deadline: new FormControl(moment())
     });
 
     this.projects = this.data.projects;
@@ -69,7 +69,7 @@ export class TaskFormComponent implements OnInit {
         description: taskFormValue.description,
         projectId: taskFormValue.projectId!,
         projectName: '',
-        deadline: taskFormValue.date!,
+        deadline: taskFormValue.deadline!,
         isDone: false,
       }
 

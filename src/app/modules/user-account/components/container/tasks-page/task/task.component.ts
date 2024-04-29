@@ -15,6 +15,9 @@ export class TaskComponent implements OnInit{
   @Output()
   editClick = new EventEmitter<void>();
 
+  @Output()
+  doneClick = new EventEmitter<void>();
+
   isExpired: boolean = false;
 
   ngOnInit(){
@@ -29,6 +32,10 @@ export class TaskComponent implements OnInit{
 
   emitEdit(): void {
     this.editClick.emit();
+  }
+
+  emitDone(): void {
+    this.doneClick.emit();
   }
 
 }

@@ -65,6 +65,17 @@ export class TableTaskComponent extends BaseTaskComponent implements OnInit, Aft
     
   }
 
+  doneTask(task: Task, event: MouseEvent){
+    event.preventDefault();
+    event.stopPropagation();
+    task.isDone = true;
+    this.taskService.updateTask(task).subscribe(
+      () => {
+        this.processData();
+      }
+    )
+  }
+
   checkExpired(task: Task){
     return moment().isAfter(task.deadline, 'day')
   }

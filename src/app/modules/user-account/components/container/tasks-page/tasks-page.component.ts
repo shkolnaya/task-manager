@@ -99,9 +99,5 @@ export class TasksPageComponent implements OnInit{
       default:
         throw new Error("Incorrect parameter");
     }
-    // throw new Error('Method not implemented.');
   }
-
-
-
 }

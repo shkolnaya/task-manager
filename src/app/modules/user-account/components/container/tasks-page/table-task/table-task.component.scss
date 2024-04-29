@@ -13,6 +13,13 @@
     }
 }
 
+.done {
+  &:hover{
+    color: #d611f4;
+  }
+  
+}
+
 .mat-mdc-row .mat-mdc-cell {
   border-bottom: 0,5px solid currentColor;
   border-top: 0,5px solid currentColor;

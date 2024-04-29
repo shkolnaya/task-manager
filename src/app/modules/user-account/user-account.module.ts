@@ -44,6 +44,7 @@ import { ExpiredStatisticsComponent } from './components/container/dashboard-pag
 import { CalendarStatisticsComponent } from './components/container/dashboard-page/calendar-statistics/calendar-statistics.component';
 import { ColumnTasksComponent } from './components/container/tasks-page/column-tasks/column-tasks.component';
 import { StatisticsService } from './components/container/dashboard-page/statistics.service';
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 
 
 
@@ -106,6 +107,7 @@ const dateFormats: MatDateFormats = {
     MatCheckboxModule,
     MatMenuModule,
     HttpClientModule,
+    MatProgressSpinnerModule
   ],
   providers: [
     ProjectsService,

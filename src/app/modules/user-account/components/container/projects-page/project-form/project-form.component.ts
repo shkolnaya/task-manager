@@ -18,34 +18,29 @@ interface ProjectForm {
   styleUrls: ['./project-form.component.scss']
 })
 export class ProjectFormComponent implements OnInit{
-
-  @Input()
   isNew: boolean
-
-  @Input()
   projectToEdit: Project
+  projectForm: FormGroup<ProjectForm> = new FormGroup<ProjectForm>({
+    name: new FormControl<string>('', Validators.required),
+    icon: new FormControl('emoji_events'),
+  });
 
   constructor(
     private projectService: ProjectsService,
     public dialogRef: MatDialogRef<ProjectFormComponent, DialogResult<Project>>,
-    @Inject(MAT_DIALOG_DATA) public data: any) {
-      dialogRef.disableClose = true;
-      dialogRef.backdropClick().subscribe(x=> {
-        const a = confirm('Are you sure?');
-        if (a) {
-          this.dialogRef.close({
-            action: 'ClickOutside'
-          })
-        }
-      })
-  }
+    @Inject(MAT_DIALOG_DATA) public data: any) {}
 
-  projectForm: FormGroup<ProjectForm>;
+
 
   ngOnInit(): void {    
-    this.projectForm = new FormGroup<ProjectForm>({
-      name: new FormControl<string>('', Validators.required),
-      icon: new FormControl('emoji_events'),
+    this.dialogRef.disableClose = true;
+    this.dialogRef.backdropClick().subscribe(x=> {
+      const a = confirm('Are you sure?');
+      if (a) {
+        this.dialogRef.close({
+          action: 'ClickOutside'
+        })
+      }
     });
 
     this.projectForm.patchValue(this.data.project);

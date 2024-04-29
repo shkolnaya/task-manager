@@ -77,6 +77,15 @@ export class ColumnTasksComponent extends BaseTaskComponent implements OnInit{
     return moment().add((8-todayIndex), 'day');
   }
 
+  doneTask(task: Task){
+    task.isDone = true;
+    this.taskService.updateTask(task).subscribe(
+      () => {
+        this.processData();
+      }
+    )
+  }
+
 
   drop(event: CdkDragDrop<Task[]>) {
     if (event.previousContainer === event.container) {
@@ -103,7 +112,6 @@ export class ColumnTasksComponent extends BaseTaskComponent implements OnInit{
         event.container.data[event.currentIndex].deadline = this.getNextWeekStart();
       }
       this.taskService.updateTask(event.container.data[event.currentIndex]).subscribe();
-      console.log('ffff')
     }
   }
 }
