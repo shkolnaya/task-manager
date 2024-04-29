@@ -24,6 +24,8 @@ export class TaskFormComponent implements OnInit {
   isNew: boolean;
   taskToEdit: Task;
 
+  isDone: boolean = false;
+
   constructor(
     public dialogRef: MatDialogRef<TaskFormComponent, DialogResult<Task>>,
     @Inject(MAT_DIALOG_DATA) public data: any) {
@@ -39,10 +41,6 @@ export class TaskFormComponent implements OnInit {
   }
 
   taskForm: FormGroup<TaskForm>;
-  // name: string;
-  // desc: string;
-  // cat: string;
-  // deadline: moment.Moment;
 
   projects: Project[];
 
@@ -70,7 +68,7 @@ export class TaskFormComponent implements OnInit {
         projectId: taskFormValue.projectId!,
         projectName: '',
         deadline: taskFormValue.deadline!,
-        isDone: false,
+        isDone: this.isDone,
       }
 
       this.dialogRef.close({
@@ -79,6 +77,11 @@ export class TaskFormComponent implements OnInit {
         isNew: this.isNew
       });
     }
+  }
+
+  doneTask(){
+    this.isDone = true;
+    this.submit();
   }
 
   cancel() {

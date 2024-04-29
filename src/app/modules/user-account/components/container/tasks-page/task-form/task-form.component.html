@@ -27,8 +27,34 @@
     </div>
 
   </div>
-  <div mat-dialog-actions>
-    <button mat-button (click)="cancel()">No Thanks</button>
-    <button mat-button type="submit" (click)="submit()" cdkFocusInitial>Ok</button>
+  <div mat-dialog-actions class="actions">
+    <div class="base">
+      <button 
+        mat-button 
+        (click)="cancel()"
+      >No Thanks</button>
+      <button 
+        mat-button 
+        type="submit" 
+        (click)="submit()" 
+        cdkFocusInitial
+      >Ok</button>
+    </div>
+
+    <div class="additional" *ngIf="!isNew">
+      <!-- <button
+        mat-button
+        *ngIf="!isNew"
+        (click)="deleteTask()"
+        class="delete"
+      >Delete</button> -->
+
+      <button
+      mat-button
+      *ngIf="!isNew"
+      (click)="doneTask()"
+    >Complete task</button>
+    </div>
+
   </div>
 </form>

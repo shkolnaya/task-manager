@@ -1,7 +1,7 @@
 <div class="side-bar">
     <div class="wrapper">
         <div class="user">
-            John User
+            {{initials}}
         </div>
         <div class="nav">
             <div class="item" routerLinkActive="active" routerLink="dashboard">
@@ -20,6 +20,12 @@
                 <img src="/assets/icons/setting.png">
                 <span>Settings</span>
             </div>
+        </div>
+    </div>
+    <div class="bottom">
+        <div class="item" (click)="logOut()" routerLink="">
+            <img src="/assets/icons/logout.png">
+            <span>Log out</span>
         </div>
     </div>
 </div>

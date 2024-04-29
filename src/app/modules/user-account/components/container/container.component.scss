@@ -7,6 +7,11 @@
 .side-bar{
     width: 20vw;
     padding: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+
+
 
     .user{
         background-color: #bb0c75;
@@ -19,6 +24,7 @@
         margin: 50px 0;
         color: white;
         font-weight: 600;
+        font-size: 28px;
     }
 
     .nav{
@@ -26,26 +32,29 @@
         gap: 5px;
         flex-direction: column;
 
-        .item{
-            color: white;
-            padding: 10px 20px;
-            border-radius: 8px;
-            display: flex;
-            align-items: center;
-            cursor: pointer;
-
-            &:hover, &.active {
-                background-color: rgba(255, 255, 255, 0.207);
-            }
-
-            img{
-                width: 25px;
-                margin-right: 20px;
-            }
-
-
-        }
     }
+
+    .item{
+        color: white;
+        padding: 10px 20px;
+        border-radius: 8px;
+        display: flex;
+        align-items: center;
+        cursor: pointer;
+
+        &:hover, &.active {
+            background-color: rgba(255, 255, 255, 0.207);
+        }
+
+        img{
+            width: 25px;
+            margin-right: 20px;
+        }
+
+
+    }
+
+
 
 }
 
