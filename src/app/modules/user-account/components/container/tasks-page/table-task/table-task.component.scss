@@ -1,0 +1,46 @@
+:host{
+  display: flex;
+  justify-content: center;
+}
+
+.expired{
+    &::after{
+        content: '.';
+        position: absolute;
+        color: transparent;
+        background-color: #ff000081;
+        box-shadow: 0 0 1px 1px #ff00006a;
+        border-radius: 50px;
+        width: 10px;
+        height: 10px;
+        margin-left: 10px;
+        animation: pulse-animation 2s infinite;
+    }
+}
+
+.done {
+  &:hover{
+    color: #d611f4;
+  }
+  
+}
+
+.mat-mdc-row .mat-mdc-cell {
+  border-bottom: 0,5px solid currentColor;
+  border-top: 0,5px solid currentColor;
+  cursor: pointer;
+}
+
+.mat-mdc-row:hover .mat-mdc-cell {
+  border-bottom: 1px solid currentColor;
+  border-top: 1px solid currentColor;
+}
+
+@keyframes pulse-animation {
+    0% {
+      box-shadow: 0 0 0 0px #ff000069;
+    }
+    100% {
+      box-shadow: 0 0 0 10px #ff000000;
+    }
+}

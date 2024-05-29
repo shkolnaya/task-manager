@@ -1,0 +1,44 @@
+<div class="header">
+    <div class="title">Settings</div>
+</div>
+
+<div class="content">
+    <form  [formGroup]="userForm">
+        <div mat-dialog-content>
+          <div class="form">
+            <p>Change your personal information</p>
+            <mat-form-field appearance="fill">
+              <mat-label>Your full name</mat-label>
+              <input matInput formControlName="fullName">
+            </mat-form-field>
+        
+            <mat-form-field appearance="fill">
+              <mat-label>Phone number</mat-label>
+              <input matInput formControlName="phoneNumber" matInput>
+            </mat-form-field>
+
+            <mat-form-field appearance="fill">
+              <mat-label>Birthday</mat-label>
+              <input formControlName="birthday" matInput [matDatepicker]="picker">
+              <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+              <mat-datepicker #picker></mat-datepicker>
+            </mat-form-field>
+
+            <mat-form-field appearance="fill">
+              <mat-label>Biography</mat-label>
+              <textarea formControlName="biography" matInput></textarea>
+            </mat-form-field>
+      
+          </div>
+        </div>
+        <div mat-dialog-actions class="actions">
+            <button 
+              mat-button 
+              type="submit" 
+              (click)="submit()" 
+              cdkFocusInitial
+            >Ok</button>
+        </div>
+      </form>
+      
+</div>

@@ -1,0 +1,34 @@
+<div class="side-bar">
+    <div class="wrapper">
+        <div class="user">
+            {{initials}}
+        </div>
+        <div class="nav">
+            <div class="item" routerLinkActive="active" routerLink="dashboard">
+                <img src="/assets/icons/dashboard.png">
+                <span>Dashboard</span>
+            </div>
+            <div class="item" routerLinkActive="active" routerLink="tasks">
+                <img src="/assets/icons/checklist.png">
+                <span>Tasks</span>
+            </div>
+            <div class="item" routerLinkActive="active" routerLink="projects">
+                <img src="/assets/icons/layers.png">
+                <span>Projects</span>
+            </div>
+            <div class="item" routerLinkActive="active" routerLink="settings">
+                <img src="/assets/icons/setting.png">
+                <span>Settings</span>
+            </div>
+        </div>
+    </div>
+    <div class="bottom">
+        <div class="item" (click)="logOut()" routerLink="">
+            <img src="/assets/icons/logout.png">
+            <span>Log out</span>
+        </div>
+    </div>
+</div>
+<div class="content">
+    <router-outlet></router-outlet>
+</div>

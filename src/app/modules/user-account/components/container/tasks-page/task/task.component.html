@@ -1,0 +1,12 @@
+<div class="substrate">
+    <div class="card">
+        <div class="category">{{task.projectName}}</div>
+        <div class="name">{{task.name}}</div>
+        <div class="desc" *ngIf="task.description">{{task.description}}</div>
+        <div class="date" [class.expired]="isExpired">Deadline: {{task.deadline | momentDate }}</div>
+        <div class="done" (click)="emitDone()">Done</div>
+        <div class="edit" (click)="emitEdit()">
+            <img src="/assets/icons/dots.png">
+        </div>
+    </div>
+</div>

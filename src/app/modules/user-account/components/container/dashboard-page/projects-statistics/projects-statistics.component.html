@@ -1,0 +1,12 @@
+<div class="container" [routerLink]="['/user/projects', completeProject.project.id]">
+    <div class="project">
+        <div class="name">{{completeProject.project.name}}</div>
+        <div class="info">
+            Complited {{completeProject.completedTasksInProjectCount}}/{{completeProject.tasksInProjectCount}}
+        </div>
+    </div>
+    <div class="bar">
+        <div class="progress" [ngStyle]="{'width': completePercent + '%'}"></div>
+    </div>
+    
+</div> 

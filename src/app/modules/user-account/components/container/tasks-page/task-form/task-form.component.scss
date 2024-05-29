@@ -1,0 +1,14 @@
+.form{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.actions{
+    display: flex;
+    justify-content: space-between;
+
+    .delete{
+        color: rgb(139, 3, 3);
+    }
+}

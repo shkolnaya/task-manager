@@ -1,0 +1,60 @@
+<form class="create" [formGroup]="taskForm">
+  <div mat-dialog-content>
+    <p>What do you plan to do?</p>
+    <div class="form">
+      <mat-form-field appearance="fill">
+        <mat-label>Task name</mat-label>
+        <input matInput formControlName="name">
+      </mat-form-field>
+      <mat-form-field appearance="fill">
+        <mat-label>Select</mat-label>
+        <mat-select formControlName="projectId">
+          <mat-option *ngFor="let project of projects" [value]="project.id">
+            {{project.name}}</mat-option>
+        </mat-select>
+      </mat-form-field>
+      <mat-form-field appearance="fill">
+        <mat-label>Deadline</mat-label>
+        <input formControlName="deadline" matInput [matDatepicker]="picker">
+        <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+      </mat-form-field>
+      <mat-form-field appearance="fill">
+        <mat-label>Task description</mat-label>
+        <textarea formControlName="description" matInput></textarea>
+      </mat-form-field>
+
+    </div>
+
+  </div>
+  <div mat-dialog-actions class="actions">
+    <div class="base">
+      <button 
+        mat-button 
+        (click)="cancel()"
+      >No Thanks</button>
+      <button 
+        mat-button 
+        type="submit" 
+        (click)="submit()" 
+        cdkFocusInitial
+      >Ok</button>
+    </div>
+
+    <div class="additional" *ngIf="!isNew">
+      <!-- <button
+        mat-button
+        *ngIf="!isNew"
+        (click)="deleteTask()"
+        class="delete"
+      >Delete</button> -->
+
+      <button
+      mat-button
+      *ngIf="!isNew"
+      (click)="doneTask()"
+    >Complete task</button>
+    </div>
+
+  </div>
+</form>
