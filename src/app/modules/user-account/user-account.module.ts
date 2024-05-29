@@ -45,6 +45,9 @@ import { CalendarStatisticsComponent } from './components/container/dashboard-pa
 import { ColumnTasksComponent } from './components/container/tasks-page/column-tasks/column-tasks.component';
 import { StatisticsService } from './components/container/dashboard-page/statistics.service';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+import {MAT_SNACK_BAR_DEFAULT_OPTIONS, MatSnackBarConfig, MatSnackBarModule} from '@angular/material/snack-bar';
+import { SettingsService } from './components/container/settings-page/settings.service';
+import { DoneTaskMessageComponent } from './components/container/tasks-page/done-task-message/done-task-message.component';
 
 
 
@@ -87,6 +90,7 @@ const dateFormats: MatDateFormats = {
     ExpiredStatisticsComponent,
     CalendarStatisticsComponent,
     ColumnTasksComponent,
+    DoneTaskMessageComponent,
   ],
   imports: [
     CommonModule,
@@ -107,12 +111,14 @@ const dateFormats: MatDateFormats = {
     MatCheckboxModule,
     MatMenuModule,
     HttpClientModule,
-    MatProgressSpinnerModule
+    MatProgressSpinnerModule,
+    MatSnackBarModule
   ],
   providers: [
     ProjectsService,
     TaskService,
     StatisticsService,
+    SettingsService,
     {
       provide: DateAdapter, 
       useClass: MomentDateAdapter, 
@@ -126,6 +132,14 @@ const dateFormats: MatDateFormats = {
       provide: HTTP_INTERCEPTORS,
       useClass: JwtInterceptor,
       multi: true
+    },
+    {
+      provide: MAT_SNACK_BAR_DEFAULT_OPTIONS, 
+      useValue: {
+        duration: 2500,
+        horizontalPosition: 'right',
+        verticalPosition: 'bottom'
+      } as MatSnackBarConfig
     }
   ]
 })

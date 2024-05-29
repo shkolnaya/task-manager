@@ -5,6 +5,7 @@ import { TaskFilter } from 'src/core/interfaces/task-filter.interface';
 import { MatDialog } from '@angular/material/dialog';
 import { BaseTaskComponent } from '../base-task/base-task.component';
 import { TaskService } from 'src/app/modules/user-account/services/task.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-calendar-task',
@@ -15,9 +16,10 @@ import { TaskService } from 'src/app/modules/user-account/services/task.service'
 
 
 export class CalendarTaskComponent extends BaseTaskComponent implements OnInit {
+  loading: boolean = false;
 
-  constructor(taskService: TaskService, dialog: MatDialog){
-    super(taskService, dialog);
+  constructor(taskService: TaskService, dialog: MatDialog, snackBar: MatSnackBar){
+    super(taskService, dialog, snackBar);
   }
 
   daysOfWeek: String[] = [
@@ -65,6 +67,8 @@ export class CalendarTaskComponent extends BaseTaskComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.loading = true;
+
     this.fillDates();
 
     this.filters = [
@@ -88,6 +92,7 @@ export class CalendarTaskComponent extends BaseTaskComponent implements OnInit {
     this.taskService.getFilteredTasks(this.filters).subscribe(
       (res: Task[])=> {
         this.tasks = res;
+        this.loading = false;
       }
     );
   }

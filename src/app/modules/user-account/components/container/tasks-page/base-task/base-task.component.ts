@@ -5,6 +5,8 @@ import { TaskFormComponent } from '../task-form/task-form.component';
 import { DialogResult } from '../dialog-result';
 import { Project } from '../../projects-page/project.interface';
 import { TaskService } from 'src/app/modules/user-account/services/task.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import * as moment from 'moment';
 
 @Component({
   selector: 'app-base-task',
@@ -18,11 +20,22 @@ export abstract class BaseTaskComponent {
 
   abstract processData(): void;
 
-  constructor(protected taskService: TaskService, private dialog: MatDialog){}
+  constructor(protected taskService: TaskService, private dialog: MatDialog, private snackBar: MatSnackBar){}
 
   editTask(editTask: Task): void {
     const task = {...editTask};
     this.openEditTaskDialog(task);
+  }
+
+  doneTask(task: Task){
+    task.isDone = true;
+    task.completedDate = moment().toISOString();
+    this.taskService.updateTask(task).subscribe(
+      () => {
+        this.processData();
+        this.snackBar.open('Congratulations', 'OK');
+      }
+    )
   }
 
   openEditTaskDialog(currentTask: Task): void {

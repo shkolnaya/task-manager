@@ -15,6 +15,7 @@ export class ProjectsPageComponent implements OnInit{
 
   constructor(private projectService: ProjectsService, public dialog: MatDialog) {}
 
+  loading: boolean = false;
   projects: Project[];
 
   ngOnInit(): void {
@@ -22,9 +23,11 @@ export class ProjectsPageComponent implements OnInit{
   }
 
   processData(){
+    this.loading = true;
     this.projectService.getProjects().subscribe(
       (res)=> {
         this.projects = res;
+        this.loading = false;
       }
     );
   }
@@ -62,6 +65,9 @@ export class ProjectsPageComponent implements OnInit{
  
     dialogRef.afterClosed().subscribe(result => {
       switch(result?.action) {
+        case 'Delete':
+          this.processData();
+          break;
         case 'Submit':
           if (result.data && result.isNew) {
             this.projectService.createProject(result.data).subscribe(

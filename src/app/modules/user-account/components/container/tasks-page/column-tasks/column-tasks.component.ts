@@ -6,6 +6,7 @@ import { TaskFilter } from 'src/core/interfaces/task-filter.interface';
 import * as moment from 'moment';
 import { CdkDragDrop, moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
 import { TaskService } from 'src/app/modules/user-account/services/task.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-column-tasks',
@@ -13,6 +14,8 @@ import { TaskService } from 'src/app/modules/user-account/services/task.service'
   styleUrls: ['./column-tasks.component.scss']
 })
 export class ColumnTasksComponent extends BaseTaskComponent implements OnInit{
+
+  loading: boolean = false;
 
   expiredTasks: Task[] = [];
   todayTasks: Task[] = [];
@@ -28,8 +31,8 @@ export class ColumnTasksComponent extends BaseTaskComponent implements OnInit{
 
   allTasks: Task[] = [];
   
-  constructor(taskService: TaskService, dialog: MatDialog){
-    super(taskService, dialog);
+  constructor(taskService: TaskService, dialog: MatDialog, snackBar: MatSnackBar){
+    super(taskService, dialog, snackBar);
   }
 
   ngOnInit(){
@@ -37,10 +40,12 @@ export class ColumnTasksComponent extends BaseTaskComponent implements OnInit{
   }
 
   processData(){
+    this.loading = true;
     this.taskService.getFilteredTasks(this.filters).subscribe(
       (res: Task[])=> {
         this.allTasks = res;
         this.filterTasks(this.allTasks);
+        this.loading = false;
       }
     );
   }
@@ -77,14 +82,7 @@ export class ColumnTasksComponent extends BaseTaskComponent implements OnInit{
     return moment().add((8-todayIndex), 'day');
   }
 
-  doneTask(task: Task){
-    task.isDone = true;
-    this.taskService.updateTask(task).subscribe(
-      () => {
-        this.processData();
-      }
-    )
-  }
+
 
 
   drop(event: CdkDragDrop<Task[]>) {

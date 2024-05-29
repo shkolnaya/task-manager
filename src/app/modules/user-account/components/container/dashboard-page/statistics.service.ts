@@ -13,7 +13,7 @@ export class StatisticsService extends BaseService{
 
   constructor( httpClient: HttpClient ) {
     super (httpClient)
-   }
+  }
 
   getProjectsStatistics(): Observable<CompleteProject[]>{
     return this.get<CompleteProject[]>('api/Statistics/CompleteProjectStatistics')

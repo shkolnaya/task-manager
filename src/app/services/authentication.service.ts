@@ -53,7 +53,7 @@ export class AuthenticationService extends BaseService{
   logoutUser() {
     localStorage.removeItem(this.localStorageKey);
     this.currentUserSubject.next(null);
-}
+  }
 
   registerUser(registrationRequest: RegistrationRequest): Observable<any> {
     return this.post( 'api/Auth/signup', registrationRequest);

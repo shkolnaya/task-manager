@@ -1,4 +1,8 @@
 <form class="login" [formGroup]="loginForm" (ngSubmit)="onLoginSubmit()">
+  <app-error-message 
+    *ngIf="errorMessage" 
+    [errorMessage]="errorMessage"
+  ></app-error-message>
   <mat-form-field appearance="fill">
     <mat-label>Login</mat-label>
     <input matInput formControlName="login">

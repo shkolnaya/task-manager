@@ -69,7 +69,7 @@ export class ProjectFormComponent implements OnInit{
     this.projectService.deleteProject(this.data.project.id).subscribe();
     this.dialogRef.close({
       data: undefined,
-      action: 'Submit'
+      action: 'Delete'
     });
   }
 

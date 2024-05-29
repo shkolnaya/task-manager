@@ -1,3 +1,4 @@
+import { HttpErrorResponse } from '@angular/common/http';
 import { Component } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { AuthenticationService } from 'src/app/services/authentication.service';
@@ -8,9 +9,11 @@ import { AuthenticationService } from 'src/app/services/authentication.service';
   styleUrls: ['./registration.component.scss']
 })
 export class RegistrationComponent {
-
+  isSuccessfull = false;
   hide = true;
   registrationForm: FormGroup;
+
+  errorMessages: string[] = [];
 
   constructor(private authService: AuthenticationService){}
 
@@ -32,8 +35,13 @@ export class RegistrationComponent {
     if (this.registrationForm.valid) {
       this.authService.registerUser(this.registrationForm.getRawValue()).subscribe(
         {
-          next: () => {},
-          error: (err) => console.log(err)
+          next: () => {
+            this.isSuccessfull = true;
+            this.errorMessages = [];
+          },
+          error: (errorRes: HttpErrorResponse) => {
+            this.errorMessages.push(errorRes.error);
+          }
         }
       )
     }

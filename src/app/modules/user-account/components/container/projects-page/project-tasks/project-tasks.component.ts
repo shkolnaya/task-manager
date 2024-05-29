@@ -161,6 +161,7 @@ export class ProjectTasksComponent implements OnInit, AfterViewChecked {
     const taskUpdateRequests: Observable<Task>[] = [];
     this.doneSelection.selected.forEach(task  => {
       task.isDone = false;
+      task.completedDate = null;
       taskUpdateRequests.push(this.taskService.updateTask(task));
     });
     forkJoin(taskUpdateRequests).subscribe(

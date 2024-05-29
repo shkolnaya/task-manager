@@ -8,4 +8,5 @@ export interface Task {
     projectName: string;
     deadline: Moment;
     isDone: boolean;
+    completedDate?: string | null;
 }

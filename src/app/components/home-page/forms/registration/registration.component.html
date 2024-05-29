@@ -1,31 +1,43 @@
-<form class="registration" [formGroup]="registrationForm" (ngSubmit)="onRegistrationFormSubmit()">
-  <mat-form-field appearance="fill">
-    <mat-label>Login</mat-label>
-    <input matInput formControlName="login">
-  </mat-form-field>
-
-  <mat-form-field appearance="fill">
-    <mat-label>Name</mat-label>
-    <input matInput formControlName="fullName">
-  </mat-form-field>
+<ng-container *ngIf="!isSuccessfull; else successfullMessage">
+  <app-error-message 
+    *ngFor="let errorMessage in errorMessages"
+    [errorMessage]="errorMessage"
+  ></app-error-message>
+  <form class="registration" [formGroup]="registrationForm" (ngSubmit)="onRegistrationFormSubmit()">
+    <mat-form-field appearance="fill">
+      <mat-label>Login</mat-label>
+      <input matInput formControlName="login">
+    </mat-form-field>
   
-  <mat-form-field appearance="fill">
-    <mat-label>Enter your password</mat-label>
-    <input matInput [type]="hide ? 'password' : 'text'" formControlName="password">
-    <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'"
-      [attr.aria-pressed]="hide">
-      <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
-    </button>
-  </mat-form-field>
-
-  <mat-form-field appearance="fill">
-      <mat-label>Confirm your password</mat-label>
-      <input matInput [type]="hide ? 'password' : 'text'" formControlName="confirmPassword">
+    <mat-form-field appearance="fill">
+      <mat-label>Name</mat-label>
+      <input matInput formControlName="fullName">
+    </mat-form-field>
+    
+    <mat-form-field appearance="fill">
+      <mat-label>Enter your password</mat-label>
+      <input matInput [type]="hide ? 'password' : 'text'" formControlName="password">
       <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'"
         [attr.aria-pressed]="hide">
         <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
       </button>
     </mat-form-field>
   
-  <button mat-raised-button color="primary" type="submit">Create account</button>
-</form>
+    <mat-form-field appearance="fill">
+        <mat-label>Confirm your password</mat-label>
+        <input matInput [type]="hide ? 'password' : 'text'" formControlName="confirmPassword">
+        <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'"
+          [attr.aria-pressed]="hide">
+          <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+        </button>
+      </mat-form-field>
+    
+    <button mat-raised-button color="primary" type="submit">Create account</button>
+  </form>  
+</ng-container>
+
+<ng-template #successfullMessage>
+  <div class="message">
+    Thank you for registration. Now you can sign in
+  </div>
+</ng-template>

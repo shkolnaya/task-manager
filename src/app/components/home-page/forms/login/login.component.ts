@@ -15,6 +15,8 @@ export class LoginComponent implements OnInit {
   hide = true;
   loginForm: FormGroup;
 
+  errorMessage: string | null;
+
   constructor( private authService: AuthenticationService, private router: Router ) { }
 
   ngOnInit(): void {
@@ -36,8 +38,13 @@ export class LoginComponent implements OnInit {
       }
       this.authService.loginUser(requestBody).subscribe(
         {
-          next: () => {this.router.navigate(["user"])},
-          error: (err) => console.log(err)
+          next: () => {
+            this.router.navigate(["user"]);
+            this.errorMessage = null;
+          },
+          error: (errorRes: HttpErrorResponse) => {
+            this.errorMessage = errorRes.error;
+          }
         }
       )
     }

@@ -7,6 +7,7 @@ import { TaskFilter } from 'src/core/interfaces/task-filter.interface';
 import { MatDialog } from '@angular/material/dialog';
 import { BaseTaskComponent } from '../base-task/base-task.component';
 import { TaskService } from 'src/app/modules/user-account/services/task.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 
 @Component({
@@ -31,8 +32,8 @@ export class TableTaskComponent extends BaseTaskComponent implements OnInit, Aft
   ];
 
  
-  constructor(taskService: TaskService, dialog: MatDialog){
-    super(taskService, dialog);
+  constructor(taskService: TaskService, dialog: MatDialog, snackBar: MatSnackBar){
+    super(taskService, dialog, snackBar);
   }
 
   ngOnInit(): void {
@@ -65,15 +66,10 @@ export class TableTaskComponent extends BaseTaskComponent implements OnInit, Aft
     
   }
 
-  doneTask(task: Task, event: MouseEvent){
+  doneTaskClicked(task: Task, event: MouseEvent){
     event.preventDefault();
     event.stopPropagation();
-    task.isDone = true;
-    this.taskService.updateTask(task).subscribe(
-      () => {
-        this.processData();
-      }
-    )
+    this.doneTask(task);
   }
 
   checkExpired(task: Task){
